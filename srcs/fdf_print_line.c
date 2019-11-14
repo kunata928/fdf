@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_print_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,8 @@
 
 #include "../includes/fdf.h"
 
-int main(void)
+void	print_line(t_xy xy_start, t_xy xy_end)
 {
-	void	*mlx;
-	void	*window;
-	int		bool;
 
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, 1000, 1000, "Title");
-	//mlx_pixel_put(mlx, window, 100, 100, 0xFFFFFF );
-	mlx_string_put(mlx, window, 100, 100, WHITE, "her");
-	mlx_loop(mlx);
-	return (0);
+	return ;
 }

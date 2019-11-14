@@ -12,7 +12,7 @@ set(SOURCES srcs/main.c)
 
 set(HEADERS includes/fdf.h includes/mlx.h)
 
-set(LIBMLX minilibx/libmlx.a)
+set(LIBMLX minilibx/libmlx.a srcs/fdf_print_line.c)
 
 add_executable(fdf ${SOURCES} ${HEADERS} ${LIBMLX})
 
