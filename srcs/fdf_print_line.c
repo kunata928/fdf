@@ -12,8 +12,52 @@
 
 #include "../includes/fdf.h"
 
-void	print_line(t_xy xy_start, t_xy xy_end)
+static void		fdf_swap(int *a, int *b, int *d, int *e)
 {
+	int c;
 
+	c = *a;
+	*a = *b;
+	*b = c;
+	c = *d;
+	*d = *e;
+	*e = c;
+	return ;
+}
+
+static void		fdf_br_init(t_br *br, t_xy xy0, t_xy xy1)
+{
+	br->dx = xy1.x - xy0.x;
+	br->dy = abs(xy1.y - xy0.y);
+	br->error = br->dx / 2;
+	br->ystep = (xy0.y < xy1.y) ? 1 : -1;
+	br->x = xy0.x;
+	br->y = xy0.y;
+	return ;
+}
+
+void			print_line_br(void *mlx, void *win, t_xy xy0, t_xy xy1)
+{
+	t_br	*br;
+
+	br = (t_br *)ft_memalloc(sizeof(t_br));
+	if ((br->dif = (xy1.y - xy0.y) > abs(xy1.x - xy0.x)))
+		fdf_swap(&(xy0.x), &(xy0.y), &(xy1.x), &(xy1.y));
+	if (xy0.x > xy1.x)
+		fdf_swap(&(xy0.x), &(xy1.x), &(xy0.y), &(xy1.y));
+	fdf_br_init(br, xy0, xy1);
+	while (br->x <= xy1.x)
+	{
+		mlx_pixel_put(mlx, win, br->dif ? br->y : br->x,
+				br->dif ? br->x : br->y, xy0.color);
+		br->error -= br->dy;
+		if (br->error < 0)
+		{
+			br->y += br->ystep;
+			br->error += br->dx;
+		}
+		(br->x) += 1;
+	}
+	ft_memdel((void **)&br);
 	return ;
 }

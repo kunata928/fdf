@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,24 +12,7 @@
 
 #include "../includes/fdf.h"
 
-int main(void)
+int			fdf_read_file()
 {
-	void	*mlx;
-	void	*win;
-	int		bool;
-	t_xy	*xy_0;
-	t_xy	*xy_n;
 
-	xy_0 = (t_xy *)ft_memalloc(sizeof(t_xy));
-	xy_n = (t_xy *)ft_memalloc(sizeof(t_xy));
-	xy_0->x = 100;
-	xy_0->y = 500;
-	xy_n->x = 500;
-	xy_n->y = 200;
-	xy_0->color = WINE;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
-	print_line_br(mlx, win, *xy_0, *xy_n);
-	mlx_loop(mlx);
-	return (0);
 }

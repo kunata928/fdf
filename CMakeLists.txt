@@ -8,7 +8,7 @@ include_directories(fdf/includes)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -framework OpenGL -framework AppKit")
 
-set(SOURCES srcs/main.c)
+set(SOURCES srcs/main.c srcs/fdf_read.c)
 
 set(HEADERS includes/fdf.h includes/mlx.h)
 
