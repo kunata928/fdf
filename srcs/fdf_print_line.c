@@ -25,7 +25,7 @@ static void		fdf_swap(int *a, int *b, int *d, int *e)
 	return ;
 }
 
-static void		fdf_br_init(t_br *br, t_xy xy0, t_xy xy1)
+static void		fdf_br_init(t_br *br, t_o xy0, t_o xy1)
 {
 	br->dx = xy1.x - xy0.x;
 	br->dy = abs(xy1.y - xy0.y);
@@ -36,7 +36,7 @@ static void		fdf_br_init(t_br *br, t_xy xy0, t_xy xy1)
 	return ;
 }
 
-void			print_line_br(void *mlx, void *win, t_xy xy0, t_xy xy1)
+void			print_line_br(void *mlx, void *win, t_o xy0, t_o xy1)
 {
 	t_br	*br;
 

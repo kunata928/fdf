@@ -11,13 +11,27 @@
 # define BLACK 0x000000
 # define WINE 0xAB271D
 # define WINSIZE 1000
+# define BUFF 10000
 
-typedef struct	s_xy
+typedef struct	s_o
 {
 	int x;
 	int y;
+	int z;
 	int color;
-}				t_xy;
+}				t_o;
+
+typedef struct	s_lst
+{
+	int		z;
+	t_list	*next;
+}				t_lst;
+
+typedef struct	s_val
+{
+	int n;
+	int nums;
+}				t_val;
 
 typedef struct	s_br
 {
@@ -30,6 +44,8 @@ typedef struct	s_br
 	int ystep;
 }				t_br;
 
-void	print_line_br(void *mlx, void *window, t_xy xy0, t_xy xy1);
+
+void		print_line_br(void *mlx, void *window, t_o xy0, t_o xy1);
+int			fdf_read_file(char *txt, t_o ***fdf);
 
 # endif
