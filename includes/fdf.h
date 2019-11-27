@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdlib.h>
 # include "../includes/mlx.h"
 # include "../libft/includes/libft.h"
 

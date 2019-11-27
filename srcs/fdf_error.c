@@ -15,17 +15,17 @@
 void		fdf_error()
 {
 	ft_putstr("error");
-	exit ;
+	exit(1);
 }
 
 void		fdf_notvalid()
 {
 	ft_putstr("not valid file");
-	exit;
+	exit(1);
 }
 
 void		fdf_smthwrong()
 {
 	ft_putstr("smt went wrong");
-	exit ;
+	exit(1);
 }

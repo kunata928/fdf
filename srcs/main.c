@@ -20,7 +20,9 @@ int main(void)
 	t_pnt		*xy_0;
 	t_pnt		*xy_n;
 	t_fdf		*fdf;
+	int			i;
 
+	i = 0;
 	xy_0 = (t_pnt *)ft_memalloc(sizeof(t_pnt));
 	xy_n = (t_pnt *)ft_memalloc(sizeof(t_pnt));
 	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
@@ -33,6 +35,12 @@ int main(void)
 	//win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
 	//print_line_br(mlx, win, *xy_0, *xy_n);
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
+	while (i < fdf->wdth * fdf->hght + 1)
+	{
+		ft_putnbr((fdf->pnt)[i]->z);
+		ft_putchar(' ');
+		i++;
+	}
 	//mlx_loop(mlx);
 	return (0);
 	free(fdf);

@@ -15,19 +15,20 @@
 int		read_first_line(char *buff)
 {
 	int i;
-	int cnt;
+	int c;
 	int len;
 	int tmp;
 
-	cnt = 0;
+	c = 0;
 	i = 0;
 	while (buff[i] != '\n')
 	{
 		len = 0;
 		tmp = fdf_atoi(&buff[i], &len);
-		cnt++;
+		c++;
 		i += len;
 	}
+	return (c);
 }
 
 int		count_enters(char *buff)
@@ -41,9 +42,8 @@ int		count_enters(char *buff)
 	{
 		if (buff[i] == '\n')
 			cnt++;
-		if (ft_isalpha(buff[i]) || ft_isdigit(buff[i])
-		|| buff[i] == '-' || buff[i] == '+')
-			fdf_notvalid();
+		//if (!( ft_isdigit(buff[i]) || buff[i] == '-' || buff[i] == '+'))
+		//	fdf_notvalid();
 		i++;
 	}
 	return (cnt);
@@ -73,17 +73,29 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 			i += len;
 			w++;
 		}
+		i++;
 		h++;
 	}
 }
 
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 {
+	int i;
+
+	i = 0;
+	if ((fdf->pnt = (t_fdf *)ft_memalloc(sizeof(t_fdf))) == NULL)
+		fdf_smthwrong();
 	fdf->hght = count_enters(buff);
 	fdf->wdth = read_first_line(buff);
 	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
 			* (fdf->hght + fdf->wdth))) == NULL)
 		fdf_smthwrong();
+	while (i < fdf->hght * fdf->wdth)
+	{
+		if ((fdf->pnt[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
+			fdf_smthwrong();
+		i++;
+	}
 	validate(buff, fdf, fdf->wdth);
 }
 
