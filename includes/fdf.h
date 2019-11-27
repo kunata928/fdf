@@ -13,13 +13,13 @@
 # define WINSIZE 1000
 # define BUFF 10000
 
-typedef struct	s_o
+typedef struct	s_pnt
 {
 	int x;
 	int y;
 	int z;
 	int color;
-}				t_o;
+}				t_pnt;
 
 typedef struct	s_lst
 {
@@ -33,6 +33,13 @@ typedef struct	s_val
 	int nums;
 }				t_val;
 
+typedef struct	s_fdf
+{
+	t_pnt	**pnt;
+	int		hght;
+	int		wdth;
+}				t_fdf;
+
 typedef struct	s_br
 {
 	int x;
@@ -44,8 +51,19 @@ typedef struct	s_br
 	int ystep;
 }				t_br;
 
+void		fdf_error();
+void		fdf_smthwrong();
+void		fdf_notvalid();
 
-void		print_line_br(void *mlx, void *window, t_o xy0, t_o xy1);
-int			fdf_read_file(char *txt, t_o ***fdf);
+void		print_line_br(void *mlx, void *window, t_pnt xy0, t_pnt xy1);
+
+int			fdf_read_file(char *txt, t_fdf *fdf);
+void		validate(char *buff, t_fdf *fdf, int nums);
+int			count_enters(char *buff);
+int			read_first_line(char *buff);
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
+
+int			fdf_atoi(const char *str, int *len);
+int			fdf_blank(char ch);
 
 # endif

@@ -11,46 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#define MAX_LONG_LONG 9223372036854775807
-
-static void	fdf_error()
-{
-	ft_putstr("error");
-	exit ;
-}
-
-static int	fdf_blank(char ch)
-{
-	if (ch == ' ' || ch == '\n' || ch == '\t'
-		|| ch == '\v' || ch == '\f' || ch == '\r')
-		return (1);
-	return (0);
-}
-
-static int	fdf_atoi(const char *str, int *len)
-{
-	unsigned long long		res;
-	int						sign;
-
-	res = 0;
-	sign = 1;
-	while (*(str + *len) && (fdf_blank(*(str + *len))))
-		*len += 1;
-	if (*(str + *len) == '-')
-		sign = -1;
-	if (*(str + *len) == '-' || *(str + *len) == '+')
-		*len += 1;
-	while (*(str + *len) && *(str + *len) >= '0' && *(str + *len) <= '9')
-	{
-		res = (unsigned long long)(res * 10 + (*(str + *len) - '0'));
-		if (res > (long long)MAX_LONG_LONG && sign == 1)
-			return (-1);
-		if (res > (long long)MAX_LONG_LONG && sign == -1)
-			return (0);
-		*len += 1;
-	}
-	return (int)(res * sign);
-}
 
 int		read_first_line(char *buff)
 {
@@ -81,56 +41,53 @@ int		count_enters(char *buff)
 	{
 		if (buff[i] == '\n')
 			cnt++;
+		if (ft_isalpha(buff[i]) || ft_isdigit(buff[i])
+		|| buff[i] == '-' || buff[i] == '+')
+			fdf_notvalid();
 		i++;
 	}
 	return (cnt);
 }
 
-static void		validate(char *buff, t_o ***fdf, int nums)
+void		validate(char *buff, t_fdf *fdf, int nums)
 {
-	int x;
-	int y;
 	int i;
-	int cnt;
 	int len;
-	int tmp;
+	int h;
+	int w;
 
-	cnt = 0;
 	i = 0;
-	while (buff[x] != '\0')
+	h = 0;
+	while (buff[i])
 	{
-		y = 0;
-		while (buff[y] != '\n')
+		w = 0;
+		while (buff[i] != '\n')
 		{
 			len = 0;
-			fdf[x][y]->z = fdf_atoi(&buff[i], &len);
-			cnt++;
+			if (w > fdf->wdth)
+				fdf_error();
+			fdf->pnt[w + h * fdf->wdth]->x = w;
+			fdf->pnt[w + h * fdf->wdth]->y = h;
+			fdf->pnt[w + h * fdf->wdth]->z = fdf_atoi(&buff[i], &len);
+			fdf->pnt[w + h * fdf->wdth]->color = WINE;
 			i += len;
-			y++;
+			w++;
 		}
-		i++;
+		h++;
 	}
 }
 
-static void		fdf_malloc_fdf(char *buff, t_o ***fdf)
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 {
-	t_val	val;
-	int i;
-
-	i = 0;
-	val.n = count_enters(buff);
-	val.nums = read_first_line(buff);
-	fdf = (t_o ***)ft_memalloc(sizeof(t_o **) * (val.n + 1));
-	fdf[val.n + 1] = NULL;
-	while (i < val.n)
-	{
-		fdf[i] = (t_o **)ft_memalloc(sizeof(t_o *) * (val.nums + 1));
-		fdf[i][val.nums + 1] = NULL;
-	}
-	validate(buff, fdf, val.nums);
+	fdf->hght = count_enters(buff);
+	fdf->wdth = read_first_line(buff);
+	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
+			* (fdf->hght + fdf->wdth))) == NULL)
+		fdf_smthwrong();
+	validate(buff, fdf, fdf->wdth);
 }
 
-int			fdf_read_file(char *txt, t_o ***fdf)
+int			fdf_read_file(char *txt, t_fdf *fdf)
 {
 	int		fd;
 	int		len;

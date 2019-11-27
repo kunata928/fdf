@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,20 @@
 
 #include "../includes/fdf.h"
 
-int main(void)
+void		fdf_error()
 {
-	void	*mlx;
-	void	*win;
-	int		bool;
-	t_pnt		*xy_0;
-	t_pnt		*xy_n;
-	t_fdf		*fdf;
+	ft_putstr("error");
+	exit ;
+}
 
-	xy_0 = (t_pnt *)ft_memalloc(sizeof(t_pnt));
-	xy_n = (t_pnt *)ft_memalloc(sizeof(t_pnt));
-	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
-	xy_0->x = 100;
-	xy_0->y = 500;
-	xy_n->x = 500;
-	xy_n->y = 600;
-	xy_0->color = WINE;
-	//mlx = mlx_init();
-	//win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
-	//print_line_br(mlx, win, *xy_0, *xy_n);
-	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
-	//mlx_loop(mlx);
-	return (0);
-	free(fdf);
+void		fdf_notvalid()
+{
+	ft_putstr("not valid file");
+	exit;
+}
+
+void		fdf_smthwrong()
+{
+	ft_putstr("smt went wrong");
+	exit ;
 }

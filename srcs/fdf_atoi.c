@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_atoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,29 +11,37 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#define MAX_LONG_LONG 9223372036854775807
 
-int main(void)
+int		fdf_blank(char ch)
 {
-	void	*mlx;
-	void	*win;
-	int		bool;
-	t_pnt		*xy_0;
-	t_pnt		*xy_n;
-	t_fdf		*fdf;
-
-	xy_0 = (t_pnt *)ft_memalloc(sizeof(t_pnt));
-	xy_n = (t_pnt *)ft_memalloc(sizeof(t_pnt));
-	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
-	xy_0->x = 100;
-	xy_0->y = 500;
-	xy_n->x = 500;
-	xy_n->y = 600;
-	xy_0->color = WINE;
-	//mlx = mlx_init();
-	//win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
-	//print_line_br(mlx, win, *xy_0, *xy_n);
-	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
-	//mlx_loop(mlx);
+	if (ch == ' ' || ch == '\n' || ch == '\t'
+		|| ch == '\v' || ch == '\f' || ch == '\r')
+		return (1);
 	return (0);
-	free(fdf);
+}
+
+int		fdf_atoi(const char *str, int *len)
+{
+	unsigned long long		res;
+	int						sign;
+
+	res = 0;
+	sign = 1;
+	while (*(str + *len) && (fdf_blank(*(str + *len))))
+		*len += 1;
+	if (*(str + *len) == '-')
+		sign = -1;
+	if (*(str + *len) == '-' || *(str + *len) == '+')
+		*len += 1;
+	while (*(str + *len) && *(str + *len) >= '0' && *(str + *len) <= '9')
+	{
+		res = (unsigned long long)(res * 10 + (*(str + *len) - '0'));
+		if (res > (long long)MAX_LONG_LONG && sign == 1)
+			return (-1);
+		if (res > (long long)MAX_LONG_LONG && sign == -1)
+			return (0);
+		*len += 1;
+	}
+	return (int)(res * sign);
 }
