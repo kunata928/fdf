@@ -39,6 +39,7 @@ typedef struct	s_fdf
 	t_pnt	**pnt;
 	int		hght;
 	int		wdth;
+	int		i;
 }				t_fdf;
 
 typedef struct	s_br
