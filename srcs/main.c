@@ -32,18 +32,17 @@ int main(void)
 	xy_n->y = 600;
 	xy_0->color = WINE;
 
-	//mlx = mlx_init();
-	//win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
-	//print_line_br(mlx, win, *xy_0, *xy_n);
+	fdf->mlx = mlx_init();
+	fdf->win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
+
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	while (i < fdf->hght * fdf->wdth)
 	{
-		if ((i + 1) % fdf->wdth == 0)
-			ft_putchar('\n');
 		ft_putnbr((fdf->pnt)[i]->z);
 		ft_putchar(' ');
-		//ft_putchar('1');
 		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
 	}
 	//mlx_loop(mlx);
 	return (0);

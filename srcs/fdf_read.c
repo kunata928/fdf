@@ -12,26 +12,49 @@
 
 #include "../includes/fdf.h"
 
-int		read_first_line(char *buff)
+int			norm_sign(char c)
+{
+	if ((c >= '0' && c <= '9') || c == ' ' || c == '\n' || c == '-' || c == '+')
+		return (1);
+	else
+		return (0);
+}
+
+void		fdf_count_numbers(char *str, int *len)
+{
+	while (*(str + *len) && (*(str + *len) == ' '))
+		*len += 1;
+	if (*(str + *len) == '-' || *(str + *len) == '+')
+		*len += 1;
+	while (*(str + *len) && *(str + *len) >= '0' && *(str + *len) <= '9')
+		*len += 1;
+	while (*(str + *len) && (*(str + *len) == ' '))
+		*len += 1;
+}
+
+int			read_first_line(char *buff)
 {
 	int i;
 	int c;
 	int len;
-	int tmp;
+	int flg;
 
 	c = 0;
 	i = 0;
 	while (buff[i] != '\n')
 	{
 		len = 0;
-		tmp = fdf_atoi(&buff[i], &len);
-		c++;
+
+		if (!(norm_sign(buff[i])))
+			fdf_error();
+		fdf_count_numbers(&buff[i], &len);
 		i += len;
+		c++;
 	}
-	return (c + 1);
+	return (c);
 }
 
-int		count_enters(char *buff)
+int			count_enters(char *buff)
 {
 	int i;
 	int cnt;
@@ -51,29 +74,34 @@ int		count_enters(char *buff)
 
 void		validate(char *buff, t_fdf *fdf, int nums)
 {
-	int i;
 	int len;
 	int h;
 	int w;
+	int tmp;
 
-	i = 0;
+	fdf->i = 0;
 	h = 0;
-	while (buff[i])
+	while (h < fdf->hght)
 	{
 		w = 0;
-		while (buff[i] != '\n')
+		while (w < fdf->wdth)
 		{
 			len = 0;
-			if (w > fdf->wdth)
+			if (buff[fdf->i] == '\n')
 				fdf_error();
+			tmp = fdf_atoi(&buff[fdf->i], &len);
+			fdf->i += len;
 			fdf->pnt[w + h * fdf->wdth]->x = w;
 			fdf->pnt[w + h * fdf->wdth]->y = h;
-			fdf->pnt[w + h * fdf->wdth]->z = fdf_atoi(&buff[i], &len);
+			fdf->pnt[w + h * fdf->wdth]->z = tmp;
 			fdf->pnt[w + h * fdf->wdth]->color = WINE;
-			i += len;
 			w++;
 		}
-		i++;
+		while (buff[fdf->i] == ' ')
+			fdf->i += 1;
+		if (buff[fdf->i] != '\n')
+			fdf_error();
+		fdf->i += 1;
 		h++;
 	}
 	return ;
@@ -84,8 +112,6 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 	int i;
 
 	i = 0;
-	if ((fdf->pnt = (t_fdf *)ft_memalloc(sizeof(t_fdf))) == NULL)
-		fdf_smthwrong();
 	fdf->hght = count_enters(buff);
 	fdf->wdth = read_first_line(buff);
 	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
@@ -121,3 +147,38 @@ int			fdf_read_file(char *txt, t_fdf *fdf)
 	fdf_malloc_fdf(buff, fdf);
 	return (1);
 }
+
+/*void		validate(char *buff, t_fdf *fdf, int nums)
+{
+	int i;
+	int len;
+	int h;
+	int w;
+	int tmp;
+
+	i = 0;
+	h = 0;
+	while (buff[i])
+	{
+		w = 0;
+		while (buff[i] != '\n')
+		{
+			len = 0;
+			if (w > fdf->wdth)
+				fdf_error();
+			tmp = fdf_atoi(&buff[i], &len);
+			i += len;
+			if (buff[i] != '\n')
+			{
+				fdf->pnt[w + h * fdf->wdth]->x = w;
+				fdf->pnt[w + h * fdf->wdth]->y = h;
+				fdf->pnt[w + h * fdf->wdth]->z = tmp;
+				fdf->pnt[w + h * fdf->wdth]->color = WINE;
+				w++;
+			}
+		}
+		i++;
+		h++;
+	}
+	return ;
+}*/

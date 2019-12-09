@@ -40,6 +40,11 @@ typedef struct	s_fdf
 	int		hght;
 	int		wdth;
 	int		i;
+	int		w;
+	int		h;
+	int		j;
+	void	*mlx;
+	void	*win;
 }				t_fdf;
 
 typedef struct	s_br
@@ -57,7 +62,7 @@ void		fdf_error();
 void		fdf_smthwrong();
 void		fdf_notvalid();
 
-void		print_line_br(void *mlx, void *window, t_pnt xy0, t_pnt xy1);
+void		print_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1);
 
 int			fdf_read_file(char *txt, t_fdf *fdf);
 void		validate(char *buff, t_fdf *fdf, int nums);

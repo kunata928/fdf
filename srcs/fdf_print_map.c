@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_print_net.c                                    :+:      :+:    :+:   */
+/*   fdf_print_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void		print_0_row(t_fdf *fdf)
+void	fdf_print_map(t_fdf *fdf)
 {
-	int i;
 
-	i = 0;
-	while (i < fdf->hght - 1)
-	{
-		//print_line_br(fdf, fdf->pnt[i]->x, fdf->pnt[i]->y)
-		i++;
-	}
-}
-
-void		fdf_print_net(t_fdf *fdf)
-{
-	fdf->i = 0;
-	fdf->w = 0;
-	fdf->h = 0;
-	while (fdf->h < fdf->hght - 1)
-	{
-		if (fdf->h == 0)
-			print_0_row(fdf);
-
-
-		fdf->h += 1;
-	}
-	return ;
 }
