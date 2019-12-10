@@ -10,31 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <zconf.h>
 #include "../includes/fdf.h"
 
-void		print_0_row(t_fdf *fdf)
+void		print_0(t_fdf *fdf)
 {
 	int i;
 
-	i = 0;
-	while (i < fdf->hght - 1)
+	i = 1;
+	while (i < fdf->wdth)
 	{
-		//print_line_br(fdf, fdf->pnt[i]->x, fdf->pnt[i]->y)
+		print_line_br(fdf, *(fdf->pnt[i - 1]), *(fdf->pnt[i]));
 		i++;
 	}
+	i = 1;
+	while (i < fdf->hght)
+	{
+		print_line_br(fdf, *(fdf->pnt[(i-1) * fdf->wdth]),
+				*(fdf->pnt[i * fdf->wdth]));
+		i++;
+	}
+	return ;
 }
 
 void		fdf_print_net(t_fdf *fdf)
 {
-	fdf->i = 0;
-	fdf->w = 0;
-	fdf->h = 0;
-	while (fdf->h < fdf->hght - 1)
+	fdf->h = 1;
+	print_0(fdf);
+	while (fdf->h < fdf->hght)
 	{
-		if (fdf->h == 0)
-			print_0_row(fdf);
-
-
+		fdf->w = 1;
+		while (fdf->w < fdf->wdth)
+		{
+			print_line_br(fdf, *(fdf->pnt[(fdf->h - 1) * fdf->wdth + fdf->w]),
+					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
+			print_line_br(fdf, *(fdf->pnt[fdf->h * fdf->wdth + fdf->w - 1]),
+					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
+			fdf->w += 1;
+		}
 		fdf->h += 1;
 	}
 	return ;

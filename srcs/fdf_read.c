@@ -20,6 +20,16 @@ int			norm_sign(char c)
 		return (0);
 }
 
+void		set_coefficient(t_fdf *fdf)
+{
+	float kw;
+	float kh;
+
+	kw = (WINSIZE - WINSIZE / 2) / fdf->wdth;
+	kh = (WINSIZE - WINSIZE / 2) / fdf->hght;
+	fdf->k = (kw <= kh) ? kw : kh;
+}
+
 void		fdf_count_numbers(char *str, int *len)
 {
 	while (*(str + *len) && (*(str + *len) == ' '))
@@ -37,7 +47,6 @@ int			read_first_line(char *buff)
 	int i;
 	int c;
 	int len;
-	int flg;
 
 	c = 0;
 	i = 0;
@@ -81,6 +90,7 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 
 	fdf->i = 0;
 	h = 0;
+	set_coefficient(fdf);
 	while (h < fdf->hght)
 	{
 		w = 0;
@@ -91,8 +101,8 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 				fdf_error();
 			tmp = fdf_atoi(&buff[fdf->i], &len);
 			fdf->i += len;
-			fdf->pnt[w + h * fdf->wdth]->x = w;
-			fdf->pnt[w + h * fdf->wdth]->y = h;
+			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k + WINSIZE / 4;
+			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k + WINSIZE / 4;
 			fdf->pnt[w + h * fdf->wdth]->z = tmp;
 			fdf->pnt[w + h * fdf->wdth]->color = WINE;
 			w++;
@@ -147,38 +157,3 @@ int			fdf_read_file(char *txt, t_fdf *fdf)
 	fdf_malloc_fdf(buff, fdf);
 	return (1);
 }
-
-/*void		validate(char *buff, t_fdf *fdf, int nums)
-{
-	int i;
-	int len;
-	int h;
-	int w;
-	int tmp;
-
-	i = 0;
-	h = 0;
-	while (buff[i])
-	{
-		w = 0;
-		while (buff[i] != '\n')
-		{
-			len = 0;
-			if (w > fdf->wdth)
-				fdf_error();
-			tmp = fdf_atoi(&buff[i], &len);
-			i += len;
-			if (buff[i] != '\n')
-			{
-				fdf->pnt[w + h * fdf->wdth]->x = w;
-				fdf->pnt[w + h * fdf->wdth]->y = h;
-				fdf->pnt[w + h * fdf->wdth]->z = tmp;
-				fdf->pnt[w + h * fdf->wdth]->color = WINE;
-				w++;
-			}
-		}
-		i++;
-		h++;
-	}
-	return ;
-}*/

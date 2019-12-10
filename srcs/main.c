@@ -33,7 +33,7 @@ int main(void)
 	xy_0->color = WINE;
 
 	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(mlx, WINSIZE, WINSIZE, "Title");
+	fdf->win = mlx_new_window(fdf->mlx, WINSIZE, WINSIZE, "Title");
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	while (i < fdf->hght * fdf->wdth)
@@ -44,7 +44,8 @@ int main(void)
 		if (i % fdf->wdth == 0)
 			ft_putchar('\n');
 	}
-	//mlx_loop(mlx);
+	fdf_print_net(fdf);
+	mlx_loop(fdf->mlx);
 	return (0);
-	free(fdf);
+	//free(fdf);
 }

@@ -36,15 +36,16 @@ typedef struct	s_val
 
 typedef struct	s_fdf
 {
+	void	*mlx;
+	void	*win;
 	t_pnt	**pnt;
+	float	k;
 	int		hght;
 	int		wdth;
 	int		i;
+	int		j;
 	int		w;
 	int		h;
-	int		j;
-	void	*mlx;
-	void	*win;
 }				t_fdf;
 
 typedef struct	s_br
@@ -69,8 +70,13 @@ void		validate(char *buff, t_fdf *fdf, int nums);
 int			count_enters(char *buff);
 int			read_first_line(char *buff);
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
+void		fdf_count_numbers(char *str, int *len);
+int			norm_sign(char c);
 
 int			fdf_atoi(const char *str, int *len);
 int			fdf_blank(char ch);
+
+void		fdf_print_net(t_fdf *fdf);
+void		print_0(t_fdf *fdf);
 
 # endif
