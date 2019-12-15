@@ -36,7 +36,7 @@ static void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1)
 	return ;
 }
 
-void			print_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1)
+void			print_line_br(t_fdf fdf, t_pnt xy0, t_pnt xy1)
 {
 	t_br	*br;
 
@@ -48,8 +48,10 @@ void			print_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1)
 	fdf_br_init(br, xy0, xy1);
 	while (br->x <= xy1.x)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, br->dif ? br->y : br->x,
-				br->dif ? br->x : br->y, xy0.color);
+		fdf.curr.x = br->dif ? br->y : br->x;
+		fdf.curr.y = br->dif ? br->x : br->y;
+		*(int*)(fdf.image + (int)fdf.curr.x * 4 +
+				(int)fdf.curr.y * fdf.s_line) = xy0.color;
 		br->error -= br->dy;
 		if (br->error < 0)
 		{

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_print_net.c                                    :+:      :+:    :+:   */
+/*   fdf_plot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,42 +13,28 @@
 #include <zconf.h>
 #include "../includes/fdf.h"
 
-/*void		print_0(t_fdf *fdf)
+void		fdf_plot(t_fdf *fdf)
 {
-	int i;
+	int		i;
 
-	i = 1;
-	while (i < fdf->wdth)
-	{
-		print_line_br(fdf, *(fdf->pnt[i - 1]), *(fdf->pnt[i]));
-		i++;
-	}
-	i = 1;
-	while (i < fdf->hght)
-	{
-		print_line_br(fdf, *(fdf->pnt[(i-1) * fdf->wdth]),
-				*(fdf->pnt[i * fdf->wdth]));
-		i++;
-	}
-	return ;
-}
-
-void		fdf_print_net(t_fdf *fdf)
-{
-	fdf->h = 1;
-	print_0(fdf);
-	while (fdf->h < fdf->hght)
-	{
-		fdf->w = 1;
-		while (fdf->w < fdf->wdth)
+	mlx_clear_window(fdf->mlx, fdf->win);
+	fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZE, WINSIZE);
+	fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
+			&fdf->s_line, &fdf->endian);
+	i = 0;
+	while (i++ < fdf->hght * fdf->wdth)
+		if (i % (fdf->hght * fdf->wdth) != 0)
 		{
-			print_line_br(fdf, *(fdf->pnt[(fdf->h - 1) * fdf->wdth + fdf->w]),
-					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
-			print_line_br(fdf, *(fdf->pnt[fdf->h * fdf->wdth + fdf->w - 1]),
-					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
-			fdf->w += 1;
+			if (fdf->hght * fdf->wdth - i < fdf->wdth)
+				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+			else if (i % (fdf->wdth) == 0 && i != 0)
+				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+			else
+			{
+				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+			}
 		}
-		fdf->h += 1;
-	}
-	return ;
-}*/
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
+	mlx_destroy_image(fdf->mlx, fdf->img_ptr);
+}

@@ -25,6 +25,8 @@ void		set_coefficient(t_fdf *fdf)
 	float kw;
 	float kh;
 
+	fdf->kx = WINSIZE / 4;
+	fdf->ky = WINSIZE / 4;
 	kw = (WINSIZE - WINSIZE / 2) / fdf->wdth;
 	kh = (WINSIZE - WINSIZE / 2) / fdf->hght;
 	fdf->k = (kw <= kh) ? kw : kh;
@@ -101,8 +103,8 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 				fdf_error();
 			tmp = fdf_atoi(&buff[fdf->i], &len);
 			fdf->i += len;
-			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k + WINSIZE / 4;
-			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k + WINSIZE / 4;
+			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k;
+			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k;
 			fdf->pnt[w + h * fdf->wdth]->z = tmp;
 			fdf->pnt[w + h * fdf->wdth]->color = WINE;
 			w++;
