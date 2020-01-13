@@ -12,6 +12,7 @@
 # define BLACK 0x000000
 # define WINE 0xAB271D
 # define WINSIZE 1000
+# define WINZERO WINSIZE/4
 # define BUFF 10000
 
 typedef struct	s_pnt
@@ -73,7 +74,9 @@ void		fdf_error();
 void		fdf_smthwrong();
 void		fdf_notvalid();
 
-void		print_line_br(t_fdf fdf, t_pnt xy0, t_pnt xy1);
+void		fdf_swap(int *a, int *b, int *d, int *e);
+void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1);
+void		plot_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1);
 
 int			fdf_read_file(char *txt, t_fdf *fdf);
 void		validate(char *buff, t_fdf *fdf, int nums);

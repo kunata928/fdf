@@ -24,9 +24,11 @@ int main(void)
 	fdf->win = mlx_new_window(fdf->mlx, WINSIZE, WINSIZE, "Title");
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
+	//the matrix read correctly
+
 	/*while (i < fdf->hght * fdf->wdth)
 	{
-		ft_putnbr((fdf->pnt)[i]->z);
+		ft_putnbr((fdf->pnt)[i]->y);
 		ft_putchar(' ');
 		i++;
 		if (i % fdf->wdth == 0)

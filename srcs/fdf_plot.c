@@ -25,14 +25,14 @@ void		fdf_plot(t_fdf *fdf)
 	while (i++ < fdf->hght * fdf->wdth)
 		if (i % (fdf->hght * fdf->wdth) != 0)
 		{
-			if (fdf->hght * fdf->wdth - i < fdf->wdth)
-				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
-			else if (i % (fdf->wdth) == 0 && i != 0)
-				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+			if (fdf->hght * fdf->wdth - i < fdf->wdth) // in case of last row
+				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+			else if (i % (fdf->wdth) == 0 && i != 0) // in case of last col
+				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + fdf->wdth]));
 			else
 			{
-				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
-				print_line_br(*fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + fdf->wdth]));
+				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
 			}
 		}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
