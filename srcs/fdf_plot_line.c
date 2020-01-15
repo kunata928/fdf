@@ -36,10 +36,14 @@ void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1)
 	return ;
 }
 
-void			plot_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1)
+void			plot_line_br(t_fdf *fdf, int i0, int i1)
 {
 	t_br	*br;
+	t_pnt	xy0;
+	t_pnt	xy1;
 
+	xy0 = *((fdf->pnt)[i0 - 1]);
+	xy1 = *((fdf->pnt)[i1 - 1]);
 	br = (t_br *)ft_memalloc(sizeof(t_br));
 	if ((br->dif = (xy1.y - xy0.y) > abs(xy1.x - xy0.x)))
 		fdf_swap(&(xy0.x), &(xy0.y), &(xy1.x), &(xy1.y));
@@ -50,8 +54,8 @@ void			plot_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1)
 	{
 		fdf->curr.x = br->dif ? br->y : br->x;
 		fdf->curr.y = br->dif ? br->x : br->y;
-		*(int*)(fdf->image + (int)fdf->curr.x * 4 +
-				(int)fdf->curr.y * fdf->s_line) = xy0.color;
+		*(int*)(fdf->image + (int)(fdf->curr.x) * 4 +
+				(int)(fdf->curr.y) * fdf->s_line) = WHITE;
 		br->error -= br->dy;
 		if (br->error < 0)
 		{

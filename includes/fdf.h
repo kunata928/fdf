@@ -76,7 +76,7 @@ void		fdf_notvalid();
 
 void		fdf_swap(int *a, int *b, int *d, int *e);
 void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1);
-void		plot_line_br(t_fdf *fdf, t_pnt xy0, t_pnt xy1);
+void		plot_line_br(t_fdf *fdf, int i0, int i1);
 
 int			fdf_read_file(char *txt, t_fdf *fdf);
 void		validate(char *buff, t_fdf *fdf, int nums);

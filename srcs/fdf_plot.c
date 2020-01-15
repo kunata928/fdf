@@ -22,19 +22,21 @@ void		fdf_plot(t_fdf *fdf)
 	fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
 			&fdf->s_line, &fdf->endian);
 	i = 0;
-	while (i++ < fdf->hght * fdf->wdth)
-		if (i % (fdf->hght * fdf->wdth) != 0)
+	while (i++ < fdf->hght * fdf->wdth - 1)
+	{
+		if (i % (fdf->wdth * fdf->hght) != 0)
 		{
 			if (fdf->hght * fdf->wdth - i < fdf->wdth) // in case of last row
-				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
-			else if (i % (fdf->wdth) == 0 && i != 0) // in case of last col
-				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + fdf->wdth]));
+				plot_line_br(fdf, i, i + 1);
+			else if (i  % (fdf->wdth) == 0 && i != 0) // in case of last col
+				plot_line_br(fdf, i, i + fdf->wdth);
 			else
 			{
-				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + fdf->wdth]));
-				plot_line_br(fdf, *(fdf->pnt[i]), *(fdf->pnt[i + 1]));
+				plot_line_br(fdf, i, i + fdf->wdth);//*((fdf->pnt)[i]), *((fdf->pnt)[i + fdf->wdth])
+				plot_line_br(fdf, i, i + 1);//*((fdf->pnt)[i]), *((fdf->pnt)[i + 1])
 			}
 		}
+	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
 	mlx_destroy_image(fdf->mlx, fdf->img_ptr);
 }
