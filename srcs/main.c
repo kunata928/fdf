@@ -40,19 +40,6 @@ int main(void)
 	}*/
 
 	fdf_plot(fdf);
-
-	/*mlx_clear_window(fdf->mlx, fdf->win);
-	fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZE, WINSIZE);
-	fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
-								   &fdf->s_line, &fdf->endian);
-	fdf->curr.x =995;
-	fdf->curr.y=995;
-	fdf->curr.color = WHITE;
-	*(int*)(fdf->image + (int)(fdf->curr.x) * 4 +
-			(int)(fdf->curr.y) * fdf->s_line) = WHITE;
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
-	mlx_destroy_image(fdf->mlx, fdf->img_ptr);
-	 */
 	mlx_loop(fdf->mlx);
 	//mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
 	return (0);

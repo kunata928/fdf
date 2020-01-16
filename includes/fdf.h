@@ -13,7 +13,7 @@
 # define WINE 0xAB271D
 # define WINSIZE 1000
 # define WINZERO WINSIZE/4
-# define BUFF 10000
+# define BUFF 1000000
 
 typedef struct	s_pnt
 {
@@ -87,6 +87,7 @@ void		fdf_count_numbers(char *str, int *len);
 int			norm_sign(char c);
 
 int			fdf_atoi(const char *str, int *len);
+int			fdf_atoi_hex(const char *str);
 int			fdf_blank(char ch);
 
 void		fdf_print_net(t_fdf *fdf);

@@ -47,3 +47,26 @@ int		fdf_atoi(const char *str, int *len)
 	}
 	return (int)(res * sign);
 }
+
+int		fdf_atoi_hex(const char *str)
+{
+	int i;
+	int num;
+
+	if (!str || *(str) != '0' || *(str + 1) != 'x')
+		return (-1);
+	i = 2;
+	while (!str[i] || (str[i] >= '0' && str[i] <= '9') ||
+	(str[i] >= 'a' && str[i] <= 'f') ||
+	(str[i] >= 'A' && str[i] <= 'F'))
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			num *= 16 + str[i] - '0';
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			num *= 16 + str[i] - 'a' + 10;
+		else
+			num *= 16 + str[i] - 'A' + 10;
+		i++;
+	}
+	return (num);
+}

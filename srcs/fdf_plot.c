@@ -24,8 +24,6 @@ void		fdf_plot(t_fdf *fdf)
 	i = 0;
 	while (i++ < fdf->hght * fdf->wdth - 1)
 	{
-		if (i % (fdf->wdth * fdf->hght) != 0)
-		{
 			if (fdf->hght * fdf->wdth - i < fdf->wdth) // in case of last row
 				plot_line_br(fdf, i, i + 1);
 			else if (i  % (fdf->wdth) == 0 && i != 0) // in case of last col
@@ -35,7 +33,6 @@ void		fdf_plot(t_fdf *fdf)
 				plot_line_br(fdf, i, i + fdf->wdth);//*((fdf->pnt)[i]), *((fdf->pnt)[i + fdf->wdth])
 				plot_line_br(fdf, i, i + 1);//*((fdf->pnt)[i]), *((fdf->pnt)[i + 1])
 			}
-		}
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
 	mlx_destroy_image(fdf->mlx, fdf->img_ptr);

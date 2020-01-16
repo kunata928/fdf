@@ -103,8 +103,8 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 				fdf_error();
 			tmp = fdf_atoi(&buff[fdf->i], &len);
 			fdf->i += len;
-			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k + WINSIZE/4;
-			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k + WINSIZE/4;
+			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k + WINSIZE / 4;
+			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k + WINSIZE / 4;
 			fdf->pnt[w + h * fdf->wdth]->z = tmp;
 			fdf->pnt[w + h * fdf->wdth]->color = WINE;
 			w++;
