@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void		fdf_swap(int *a, int *b, int *d, int *e)
+void		fdf_swap(double *a, double *b, double *d, double *e)
 {
 	int c;
 

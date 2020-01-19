@@ -13,6 +13,18 @@
 #include "../includes/fdf.h"
 #define MAX_LONG_LONG 9223372036854775807
 
+double	fdf_doublebltoint(double nbr)
+{
+	double tmp;
+
+	tmp = nbr;
+	tmp -= (int)tmp;
+	if (tmp >= 0.5)
+		return((int)nbr + 1);
+	else
+		return ((int)nbr);
+}
+
 int		fdf_blank(char ch)
 {
 	if (ch == ' ' || ch == '\t'
