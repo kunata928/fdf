@@ -129,9 +129,14 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
 			* (fdf->hght * fdf->wdth))) == NULL)
 		fdf_smthwrong();
+	if ((fdf->cur = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
+			* (fdf->hght * fdf->wdth))) == NULL)
+		fdf_smthwrong();
 	while (i < fdf->hght * fdf->wdth)
 	{
 		if ((fdf->pnt[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
+			fdf_smthwrong();
+		if ((fdf->cur[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
 			fdf_smthwrong();
 		i++;
 	}

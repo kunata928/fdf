@@ -38,10 +38,10 @@ int main(void)
 		if (i % fdf->wdth == 0)
 			ft_putchar('\n');
 	}*/
-
+	fdf_copy_in_cur(fdf);
 	fdf_plot(fdf);
-	mlx_loop(fdf->mlx);
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
+	mlx_loop(fdf->mlx);
 	return (0);
 	//free(fdf);
 }

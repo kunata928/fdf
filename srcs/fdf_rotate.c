@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_keyboard.c                                     :+:      :+:    :+:   */
+/*   fdf_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,25 @@
 
 #include "../includes/fdf.h"
 
-int		fdf_check_key(int keycode)
+void		fdf_rotate(int keycode, t_fdf *fdf)
 {
-	if (keycode == KEY_ESC || keycode == KEY_SPACE ||
-			keycode == KEY_NUM_UP || keycode == KEY_NUM_DOWN ||
-			keycode == KEY_NUM_4 || keycode == KEY_NUM_6 ||
-			keycode == KEY_NUM_2 || keycode == KEY_NUM_8 ||
-			keycode == KEY_NUM_1 || keycode == KEY_NUM_3)
-		return (1);
-	return (0);
-}
+	int i;
 
-int		fdf_key_press(int keycode, t_fdf *fdf)
-{
-	if (fdf_check_key(keycode))
-	{
-		if (keycode == KEY_ESC)
-			exit(0);
-		if (keycode == KEY_NUM_4 || keycode == KEY_NUM_6 || keycode == KEY_NUM_2
-		|| keycode == KEY_NUM_8 || keycode == KEY_NUM_1 || keycode == KEY_NUM_3)
-			fdf_rotate(keycode, fdf);
-	}
-	return (0);
+	i = 0;
+	if (keycode == KEY_NUM_4)
+		fdf->ang_x -= ANG_STEP;
+	else if (keycode == KEY_NUM_6)
+		fdf->ang_x += ANG_STEP;
+	else if (keycode == KEY_NUM_2)
+		fdf->ang_y -= ANG_STEP;
+	else if (keycode == KEY_NUM_8)
+		fdf->ang_y += ANG_STEP;
+	else if (keycode == KEY_NUM_1)
+		fdf->ang_z -= ANG_STEP;
+	else if (keycode == KEY_NUM_3)
+		fdf->ang_z += ANG_STEP;
+	fdf_copy_in_cur(fdf);
+
+	fdf_eval_cur(fdf);
+	fdf_plot(fdf);
 }

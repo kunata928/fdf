@@ -13,6 +13,18 @@
 #include <zconf.h>
 #include "../includes/fdf.h"
 
+void		fdf_copy_in_cur(t_fdf *fdf)
+{
+	int i;
+
+	i = 0;
+	while (i < fdf->wdth * fdf->hght)
+	{
+		fdf->cur[i] = fdf->pnt[i];
+		i++;
+	}
+}
+
 void		fdf_plot(t_fdf *fdf)
 {
 	int		i;
@@ -30,8 +42,8 @@ void		fdf_plot(t_fdf *fdf)
 				plot_line_br(fdf, i, i + fdf->wdth);
 			else
 			{
-				plot_line_br(fdf, i, i + fdf->wdth);//*((fdf->pnt)[i]), *((fdf->pnt)[i + fdf->wdth])
-				plot_line_br(fdf, i, i + 1);//*((fdf->pnt)[i]), *((fdf->pnt)[i + 1])
+				plot_line_br(fdf, i, i + fdf->wdth);
+				plot_line_br(fdf, i, i + 1);
 			}
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);

@@ -52,8 +52,19 @@ void	fdf_eval_cur(t_fdf *fdf)
 	i = 0;
 	while (i++ < fdf->wdth * fdf->hght)
 	{
-		fdf_rotate_x(&fdf->cur[i]->y, &fdf->cur[i]->z, fdf->ang_x);
-		fdf_rotate_y(&fdf->cur[i]->x, &fdf->cur[i]->z, fdf->ang_y);
-		fdf_rotate_z(&fdf->cur[i]->x, &fdf->cur[i]->y, fdf->ang_z);
+		fdf_rotate_x(&((fdf->cur)[i]->y), &((fdf->cur)[i]->z), fdf->ang_x);
+		fdf_rotate_y(&((fdf->cur)[i]->x), &((fdf->cur)[i]->z), fdf->ang_y);
+		fdf_rotate_z(&((fdf->cur)[i]->x), &((fdf->cur)[i]->y), fdf->ang_z);
+	}
+	i = 0;
+	while (i < fdf->hght * fdf->wdth - 1)
+	{
+		ft_putnbr((fdf->cur)[i]->x);
+		ft_putchar(' ');
+		ft_putnbr((fdf->cur)[i]->y);
+		ft_putchar(';');
+		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
 	}
 }

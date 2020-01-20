@@ -14,6 +14,7 @@
 # define WINSIZE			1000
 # define WINZERO			WINSIZE/4
 # define BUFF				1000000
+# define ANG_STEP			0.05
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -69,12 +70,6 @@ typedef struct	s_val
 	int nums;
 }				t_val;
 
-typedef struct	s_curr
-{
-	double		x;
-	double		y;
-}				t_curr;
-
 typedef struct	s_fdf
 {
 	double	ang_x;
@@ -89,7 +84,7 @@ typedef struct	s_fdf
 	int		endian;
 	t_pnt	**pnt;
 	t_pnt	**cur;
-	t_pnt	curr;
+	t_pnt	tmp;
 	float	k;
 	float	kx;
 	float	ky;
@@ -137,8 +132,16 @@ void		fdf_print_net(t_fdf *fdf);
 void		print_0(t_fdf *fdf);
 
 void		fdf_plot(t_fdf *fdf);
+void		fdf_copy_in_cur(t_fdf *fdf);
 
-void		fdf_key_press(int keycode, t_fdf *fdf);
+int		fdf_key_press(int keycode, t_fdf *fdf);
 int			fdf_check_key(int key);
+
+void		fdf_rotate(int keycode, t_fdf *fdf);
+
+void		fdf_eval_cur(t_fdf *fdf);
+void		fdf_rotate_x(double *y, double *z, double ang);
+void		fdf_rotate_y(double *x, double *z, double ang);
+void		fdf_rotate_z(double *x, double *y, double ang);
 
 # endif
