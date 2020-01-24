@@ -119,30 +119,7 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 	return ;
 }
 
-void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
-{
-	int i;
 
-	i = 0;
-	fdf->hght = count_enters(buff);
-	fdf->wdth = read_first_line(buff);
-	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
-			* (fdf->hght * fdf->wdth))) == NULL)
-		fdf_smthwrong();
-	if ((fdf->cur = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
-			* (fdf->hght * fdf->wdth))) == NULL)
-		fdf_smthwrong();
-	while (i < fdf->hght * fdf->wdth)
-	{
-		if ((fdf->pnt[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
-			fdf_smthwrong();
-		if ((fdf->cur[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
-			fdf_smthwrong();
-		i++;
-	}
-	validate(buff, fdf, fdf->wdth);
-	return ;
-}
 
 int			fdf_read_file(char *txt, t_fdf *fdf)
 {

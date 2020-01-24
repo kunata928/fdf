@@ -30,7 +30,42 @@ void		fdf_rotate(int keycode, t_fdf *fdf)
 	else if (keycode == KEY_NUM_3)
 		fdf->ang_z += ANG_STEP;
 	fdf_copy_in_cur(fdf);
-
+	while (i < fdf->hght * fdf->wdth)
+	{
+		ft_putnbr((fdf->pnt)[i]->x);
+		ft_putchar(' ');
+		ft_putnbr((fdf->pnt)[i]->y);
+		ft_putchar(';');
+		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
+	}
+	ft_putchar('\n');
+	i = 0;
+	while (i < fdf->hght * fdf->wdth)
+	{
+		ft_putnbr((fdf->cur)[i]->x);
+		ft_putchar(' ');
+		ft_putnbr((fdf->cur)[i]->y);
+		ft_putchar(';');
+		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
+	}
 	fdf_eval_cur(fdf);
+	ft_putchar('\n');
+	i = 0;
+	while (i < fdf->hght * fdf->wdth)
+	{
+		ft_putnbr((fdf->cur)[i]->x);
+		ft_putchar(' ');
+		ft_putnbr((fdf->cur)[i]->y);
+		ft_putchar(';');
+		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
+	}
+	ft_putchar(';');
+	ft_putchar('\n');
 	fdf_plot(fdf);
 }

@@ -8,3 +8,14 @@
 -50 67 36 13 12 -2 -28 10 -60 -58
 3 -27 -52 56 26 -52 59 -31 -48 -6
 -59 -30 50 36 5 -11 0 60 -24 -34
+
+while (i < fdf->hght * fdf->wdth)
+	{
+		ft_putnbr((fdf->cur)[i]->x);
+		ft_putchar(' ');
+		ft_putnbr((fdf->cur)[i]->y);
+		ft_putchar(';');
+		i++;
+		if (i % fdf->wdth == 0)
+			ft_putchar('\n');
+}

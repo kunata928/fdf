@@ -14,7 +14,7 @@
 # define WINSIZE			1000
 # define WINZERO			WINSIZE/4
 # define BUFF				1000000
-# define ANG_STEP			0.05
+# define ANG_STEP			0.5
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -55,19 +55,19 @@
 
 typedef struct	s_pnt
 {
-	double x;
-	double y;
-	double z;
-	double ang_x;
-	double ang_y;
-	double ang_z;
-	int color;
+	double	x;
+	double	y;
+	double	z;
+	double	ang_x;
+	double	ang_y;
+	double	ang_z;
+	int		color;
 }				t_pnt;
 
 typedef struct	s_val
 {
-	int n;
-	int nums;
+	int		n;
+	int		nums;
 }				t_val;
 
 typedef struct	s_fdf
@@ -102,10 +102,16 @@ typedef struct	s_br
 	double	y;
 	double	dx;
 	double	dy;
+	t_pnt	xy0;
+	t_pnt	xy1;
 	int		error;
 	int		dif;
 	int		ystep;
 }				t_br;
+
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
+void		fdf_init_subj(t_fdf *fdf);
+void		fdf_copy_in_cur(t_fdf *fdf);
 
 void		fdf_error();
 void		fdf_smthwrong();
@@ -119,7 +125,6 @@ int			fdf_read_file(char *txt, t_fdf *fdf);
 void		validate(char *buff, t_fdf *fdf, int nums);
 int			count_enters(char *buff);
 int			read_first_line(char *buff);
-void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
 void		fdf_count_numbers(char *str, int *len);
 int			norm_sign(char c);
 
@@ -132,9 +137,8 @@ void		fdf_print_net(t_fdf *fdf);
 void		print_0(t_fdf *fdf);
 
 void		fdf_plot(t_fdf *fdf);
-void		fdf_copy_in_cur(t_fdf *fdf);
 
-int		fdf_key_press(int keycode, t_fdf *fdf);
+int			fdf_key_press(int keycode, t_fdf *fdf);
 int			fdf_check_key(int key);
 
 void		fdf_rotate(int keycode, t_fdf *fdf);
