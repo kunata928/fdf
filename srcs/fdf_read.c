@@ -20,17 +20,7 @@ int			norm_sign(char c)
 		return (0);
 }
 
-void		set_coefficient(t_fdf *fdf)
-{
-	float kw;
-	float kh;
 
-	fdf->kx = WINSIZE / 4;
-	fdf->ky = WINSIZE / 4;
-	kw = (WINSIZE - WINSIZE / 2) / fdf->wdth;
-	kh = (WINSIZE - WINSIZE / 2) / fdf->hght;
-	fdf->k = (kw <= kh) ? kw : kh;
-}
 
 void		fdf_count_numbers(char *str, int *len)
 {
@@ -82,44 +72,6 @@ int			count_enters(char *buff)
 	}
 	return (cnt);
 }
-
-void		validate(char *buff, t_fdf *fdf, int nums)
-{
-	int len;
-	int h;
-	int w;
-	int tmp;
-
-	fdf->i = 0;
-	h = 0;
-	set_coefficient(fdf);
-	while (h < fdf->hght)
-	{
-		w = 0;
-		while (w < fdf->wdth)
-		{
-			len = 0;
-			if (buff[fdf->i] == '\n')
-				fdf_error();
-			tmp = fdf_atoi(&buff[fdf->i], &len);
-			fdf->i += len;
-			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k + WINSIZE / 4;
-			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k + WINSIZE / 4;
-			fdf->pnt[w + h * fdf->wdth]->z = tmp;
-			fdf->pnt[w + h * fdf->wdth]->color = WINE;
-			w++;
-		}
-		while (buff[fdf->i] == ' ')
-			fdf->i += 1;
-		if (buff[fdf->i] != '\n')
-			fdf_error();
-		fdf->i += 1;
-		h++;
-	}
-	return ;
-}
-
-
 
 int			fdf_read_file(char *txt, t_fdf *fdf)
 {

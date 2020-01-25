@@ -31,6 +31,55 @@ void		fdf_copy_in_cur(t_fdf *fdf)
 	}
 }
 
+void		fdf_set_coefficient(t_fdf *fdf)
+{
+	double kw;
+	double kh;
+
+	kw = (0.6 * WINSIZEX) / (fdf->wdth - 1);
+	kh = (0.6 * WINSIZEY) / (fdf->hght - 1);
+	fdf->k = (kw <= kh) ? kw : kh;
+	fdf->kx = (int)fdf_doublebltoint((WINSIZEX - (fdf->wdth - 1) * fdf->k) / 2);
+	fdf->ky = (int)fdf_doublebltoint((WINSIZEY - (fdf->hght - 1) * fdf->k) / 2);
+	fdf->dx = (int)fdf_doublebltoint(((fdf->wdth - 1) * fdf->k) / 2);
+	fdf->dy = (int)fdf_doublebltoint(((fdf->hght - 1) * fdf->k) / 2);
+}
+
+void		validate(char *buff, t_fdf *fdf, int nums)
+{
+	int len;
+	int h;
+	int w;
+	int tmp;
+
+	fdf->i = 0;
+	h = 0;
+	while (h < fdf->hght)
+	{
+		w = 0;
+		while (w < fdf->wdth)
+		{
+			len = 0;
+			if (buff[fdf->i] == '\n')
+				fdf_error();
+			tmp = fdf_atoi(&buff[fdf->i], &len);
+			fdf->i += len;
+			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k - fdf->dx;
+			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k - fdf->dy;
+			fdf->pnt[w + h * fdf->wdth]->z = tmp;
+			fdf->pnt[w + h * fdf->wdth]->color = WINE;
+			w++;
+		}
+		while (buff[fdf->i] == ' ')
+			fdf->i += 1;
+		if (buff[fdf->i] != '\n')
+			fdf_error();
+		fdf->i += 1;
+		h++;
+	}
+	return ;
+}
+
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 {
 	int i;
@@ -52,6 +101,7 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 			fdf_smthwrong();
 		i++;
 	}
+	fdf_set_coefficient(fdf);
 	validate(buff, fdf, fdf->wdth);
 	return ;
 }

@@ -11,10 +11,11 @@
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
 # define WINE				0xAB271D
-# define WINSIZE			1000
-# define WINZERO			WINSIZE/4
+# define WINSIZEX			1500
+# define WINSIZEY			1000
+# define WINZERO			WINSIZEX/4
 # define BUFF				1000000
-# define ANG_STEP			0.5
+# define ANG_STEP			0.05
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -85,9 +86,11 @@ typedef struct	s_fdf
 	t_pnt	**pnt;
 	t_pnt	**cur;
 	t_pnt	tmp;
-	float	k;
-	float	kx;
-	float	ky;
+	double	k;
+	int		kx;
+	int		ky;
+	int		dx;
+	int		dy;
 	int		hght;
 	int		wdth;
 	int		i;
@@ -112,6 +115,7 @@ typedef struct	s_br
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
 void		fdf_init_subj(t_fdf *fdf);
 void		fdf_copy_in_cur(t_fdf *fdf);
+void		fdf_set_coefficient(t_fdf *fdf);
 
 void		fdf_error();
 void		fdf_smthwrong();
@@ -136,6 +140,7 @@ double		fdf_doublebltoint(double nbr);
 void		fdf_print_net(t_fdf *fdf);
 void		print_0(t_fdf *fdf);
 
+void		fdf_center(t_fdf *fdf);
 void		fdf_plot(t_fdf *fdf);
 
 int			fdf_key_press(int keycode, t_fdf *fdf);

@@ -15,14 +15,20 @@
 
 double	fdf_doublebltoint(double nbr)
 {
-	double tmp;
-
-	tmp = nbr;
-	tmp -= (int)tmp;
-	if (tmp >= 0.5)
-		return((int)nbr + 1);
+	if (nbr >= 0)
+	{
+		if (nbr - (int)nbr >= 0.5)
+			return ((int)nbr + 1);
+		else
+			return ((int)nbr);
+	}
 	else
-		return ((int)nbr);
+	{
+		if (fabs(nbr) - abs((int)nbr) >= 0.5)
+			return ((int)nbr - 1);
+		else
+			return ((int)nbr);
+	}
 }
 
 int		fdf_blank(char ch)

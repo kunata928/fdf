@@ -24,22 +24,13 @@ int main(void)
 
 	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
 	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, WINSIZE, WINSIZE, "Title");
+	fdf->win = mlx_new_window(fdf->mlx, WINSIZEX, WINSIZEY, "Title");
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	//the matrix read correctly
-
-	/*while (i < fdf->hght * fdf->wdth)
-	{
-		ft_putnbr((fdf->pnt)[i]->x);
-		ft_putchar(' ');
-		ft_putnbr((fdf->pnt)[i]->y);
-		ft_putchar(';');
-		i++;
-		if (i % fdf->wdth == 0)
-			ft_putchar('\n');
-	}*/
+	printf("%f", fdf_doublebltoint(5.4));
 	fdf_copy_in_cur(fdf);
+	fdf_center(fdf);
 	fdf_plot(fdf);
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
 	mlx_loop(fdf->mlx);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_rotate.c                                       :+:      :+:    :+:   */
+/*   fdf_center.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,25 +12,16 @@
 
 #include "../includes/fdf.h"
 
-void		fdf_rotate(int keycode, t_fdf *fdf)
+void		fdf_center(t_fdf *fdf)
 {
 	int i;
 
 	i = 0;
-	if (keycode == KEY_NUM_4)
-		fdf->ang_x -= ANG_STEP;
-	else if (keycode == KEY_NUM_6)
-		fdf->ang_x += ANG_STEP;
-	else if (keycode == KEY_NUM_2)
-		fdf->ang_y -= ANG_STEP;
-	else if (keycode == KEY_NUM_8)
-		fdf->ang_y += ANG_STEP;
-	else if (keycode == KEY_NUM_1)
-		fdf->ang_z -= ANG_STEP;
-	else if (keycode == KEY_NUM_3)
-		fdf->ang_z += ANG_STEP;
-	fdf_copy_in_cur(fdf);
-	fdf_eval_cur(fdf);
-	fdf_center(fdf);
-	fdf_plot(fdf);
+	while (i < fdf->wdth * fdf->hght)
+	{
+		(fdf->cur[i])->x = (fdf->cur[i])->x + fdf->kx + fdf->dx;//(int)
+		(fdf->cur[i])->y = (fdf->cur[i])->y + fdf->ky + fdf->dy;//fdf_doublebltoint
+		i++;
+	}
+	return ;
 }

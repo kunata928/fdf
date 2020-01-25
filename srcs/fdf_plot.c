@@ -18,7 +18,7 @@ void		fdf_plot(t_fdf *fdf)
 	int		i;
 
 	mlx_clear_window(fdf->mlx, fdf->win);
- 	fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZE, WINSIZE);
+ 	fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZEX, WINSIZEY);
 	fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
 			&fdf->s_line, &fdf->endian);
 	i = 0;
