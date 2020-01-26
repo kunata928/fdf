@@ -15,7 +15,7 @@
 # define WINSIZEY			1000
 # define WINZERO			WINSIZEX/4
 # define BUFF				1000000
-# define ANG_STEP			0.05
+# define ANG_STEP			0.5
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -107,7 +107,7 @@ typedef struct	s_br
 	double	dy;
 	t_pnt	xy0;
 	t_pnt	xy1;
-	int		error;
+	double	error;
 	int		dif;
 	int		ystep;
 }				t_br;
@@ -153,4 +153,8 @@ void		fdf_rotate_x(double *y, double *z, double ang);
 void		fdf_rotate_y(double *x, double *z, double ang);
 void		fdf_rotate_z(double *x, double *y, double ang);
 
+
+
+
+void		plot_line_br_1(void *mlx, void *win, double x0, double y0, double x1, double y1);
 # endif

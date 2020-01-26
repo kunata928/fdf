@@ -28,11 +28,13 @@ int main(void)
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	//the matrix read correctly
-	printf("%f", fdf_doublebltoint(5.4));
+
+	//plot_line_br_1(fdf->mlx, fdf->win, 450, 624, 450, 499);
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
+
 	mlx_loop(fdf->mlx);
 	return (0);
 	//free(fdf);

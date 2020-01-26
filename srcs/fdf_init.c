@@ -39,10 +39,10 @@ void		fdf_set_coefficient(t_fdf *fdf)
 	kw = (0.6 * WINSIZEX) / (fdf->wdth - 1);
 	kh = (0.6 * WINSIZEY) / (fdf->hght - 1);
 	fdf->k = (kw <= kh) ? kw : kh;
-	fdf->kx = (int)fdf_doublebltoint((WINSIZEX - (fdf->wdth - 1) * fdf->k) / 2);
-	fdf->ky = (int)fdf_doublebltoint((WINSIZEY - (fdf->hght - 1) * fdf->k) / 2);
-	fdf->dx = (int)fdf_doublebltoint(((fdf->wdth - 1) * fdf->k) / 2);
-	fdf->dy = (int)fdf_doublebltoint(((fdf->hght - 1) * fdf->k) / 2);
+	fdf->kx = (int)((WINSIZEX - (fdf->wdth - 1) * fdf->k) / 2);
+	fdf->ky = (int)((WINSIZEY - (fdf->hght - 1) * fdf->k) / 2);
+	fdf->dx = (int)(((fdf->wdth - 1) * fdf->k) / 2);
+	fdf->dy = (int)(((fdf->hght - 1) * fdf->k) / 2);
 }
 
 void		validate(char *buff, t_fdf *fdf, int nums)
@@ -66,7 +66,7 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 			fdf->i += len;
 			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k - fdf->dx;
 			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k - fdf->dy;
-			fdf->pnt[w + h * fdf->wdth]->z = tmp;
+			fdf->pnt[w + h * fdf->wdth]->z = tmp * 10;
 			fdf->pnt[w + h * fdf->wdth]->color = WINE;
 			w++;
 		}

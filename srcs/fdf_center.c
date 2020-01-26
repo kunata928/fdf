@@ -19,8 +19,8 @@ void		fdf_center(t_fdf *fdf)
 	i = 0;
 	while (i < fdf->wdth * fdf->hght)
 	{
-		(fdf->cur[i])->x = (fdf->cur[i])->x + fdf->kx + fdf->dx;//(int)
-		(fdf->cur[i])->y = (fdf->cur[i])->y + fdf->ky + fdf->dy;//fdf_doublebltoint
+		(fdf->cur[i])->x = (int)((fdf->cur[i])->x + fdf->kx + fdf->dx);
+		(fdf->cur[i])->y = (int)((fdf->cur[i])->y + fdf->ky + fdf->dy);
 		i++;
 	}
 	return ;

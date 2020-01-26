@@ -12,19 +12,19 @@
 
 #include "../includes/fdf.h"
 
-void		fdf_error()
+void		fdf_error(void)
 {
 	ft_putstr("error");
 	exit(1);
 }
 
-void		fdf_notvalid()
+void		fdf_notvalid(void)
 {
 	ft_putstr("not valid file");
 	exit(1);
 }
 
-void		fdf_smthwrong()
+void		fdf_smthwrong(void)
 {
 	ft_putstr("smt went wrong");
 	exit(1);

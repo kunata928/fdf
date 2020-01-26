@@ -19,3 +19,16 @@ while (i < fdf->hght * fdf->wdth)
 		if (i % fdf->wdth == 0)
 			ft_putchar('\n');
 }
+
+typedef struct	s_br
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	t_pnt	xy0;
+	t_pnt	xy1;
+	double	error;
+	int		dif;
+	int		ystep;
+}				t_br;

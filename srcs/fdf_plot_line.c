@@ -44,17 +44,20 @@ void		plot_line_br(t_fdf *fdf, int i0, int i1)
 		fdf_smthwrong();
 	br->xy0 = *((fdf->cur)[i0 - 1]);
 	br->xy1 = *((fdf->cur)[i1 - 1]);
-	if ((br->dif = (br->xy1.y - br->xy0.y) > fabs(br->xy1.x - br->xy0.x)))
+	if ((br->dif = fabs(br->xy1.y - br->xy0.y) > fabs(br->xy1.x - br->xy0.x)))
 		fdf_swap(&(br->xy0.x), &(br->xy0.y), &(br->xy1.x), &(br->xy1.y));
 	if (br->xy0.x > br->xy1.x)
 		fdf_swap(&(br->xy0.x), &(br->xy1.x), &(br->xy0.y), &(br->xy1.y));
 	fdf_br_init(br, br->xy0, br->xy1);
 	while (br->x <= br->xy1.x)
 	{
+
 		fdf->tmp.x = br->dif ? br->y : br->x;
 		fdf->tmp.y = br->dif ? br->x : br->y;
-		*(int*)(fdf->image + (int)(fdf->tmp.x) * 4 +
-				(int)(fdf->tmp.y) * fdf->s_line) = WHITE;
+		if (fdf->tmp.x >= 0 && fdf->tmp.x < WINSIZEX
+		&& fdf->tmp.y >= 0 && fdf->tmp.y < WINSIZEY)
+			*(int*)(fdf->image + (int)(fdf->tmp.x) * 4 +
+					(int)(fdf->tmp.y) * fdf->s_line) = 0xFFFF;
 		br->error -= br->dy;
 		if (br->error < 0)
 		{

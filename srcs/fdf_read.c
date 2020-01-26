@@ -66,8 +66,6 @@ int			count_enters(char *buff)
 	{
 		if (buff[i] == '\n')
 			cnt++;
-		//if (!( ft_isdigit(buff[i]) || buff[i] == '-' || buff[i] == '+'))
-		//	fdf_notvalid();
 		i++;
 	}
 	return (cnt);
