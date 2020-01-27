@@ -11,11 +11,16 @@
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
 # define WINE				0xAB271D
-# define WINSIZEX			1500
-# define WINSIZEY			1000
+# define ROSE				0x9D788F
+# define DEF_COL			0xC488AC
+
+# define WINSIZEX			2000
+# define WINSIZEY			1500
 # define WINZERO			WINSIZEX/4
 # define BUFF				1000000
-# define ANG_STEP			0.5
+# define ANG_STEP			0.01
+# define SHIFT_STEP			5
+# define ZOOM_STEP			0.001
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -76,6 +81,10 @@ typedef struct	s_fdf
 	double	ang_x;
 	double	ang_y;
 	double	ang_z;
+	int		shift_x;
+	int		shift_y;
+
+
 	void	*mlx;
 	void	*win;
 	void	*img_ptr;
@@ -83,8 +92,10 @@ typedef struct	s_fdf
 	int		bpp;
 	int		s_line;
 	int		endian;
+
 	t_pnt	**pnt;
 	t_pnt	**cur;
+
 	t_pnt	tmp;
 	double	k;
 	int		kx;
@@ -93,6 +104,7 @@ typedef struct	s_fdf
 	int		dy;
 	int		hght;
 	int		wdth;
+
 	int		i;
 	int		j;
 	int		w;
@@ -112,10 +124,20 @@ typedef struct	s_br
 	int		ystep;
 }				t_br;
 
+int			fdf_read_file(char *txt, t_fdf *fdf);
+int			count_enters(char *buff);
+int			read_first_line(char *buff);
+void		fdf_count_numbers(char *str, int *len);
+int			norm_sign(char c);
+
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
+void		validate(char *buff, t_fdf *fdf, int nums);
 void		fdf_init_subj(t_fdf *fdf);
 void		fdf_copy_in_cur(t_fdf *fdf);
 void		fdf_set_coefficient(t_fdf *fdf);
+
+int			fdf_color_peeks_deflt(int tmp);
+int			color_pnt_deflt(t_fdf fdf, int i, int i0, int i1);
 
 void		fdf_error();
 void		fdf_smthwrong();
@@ -125,22 +147,14 @@ void		fdf_swap(double *a, double *b, double *d, double *e);
 void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1);
 void		plot_line_br(t_fdf *fdf, int i0, int i1);
 
-int			fdf_read_file(char *txt, t_fdf *fdf);
-void		validate(char *buff, t_fdf *fdf, int nums);
-int			count_enters(char *buff);
-int			read_first_line(char *buff);
-void		fdf_count_numbers(char *str, int *len);
-int			norm_sign(char c);
-
 int			fdf_atoi(const char *str, int *len);
 int			fdf_atoi_hex(const char *str);
 int			fdf_blank(char ch);
 double		fdf_doublebltoint(double nbr);
 
-void		fdf_print_net(t_fdf *fdf);
-void		print_0(t_fdf *fdf);
-
 void		fdf_center(t_fdf *fdf);
+void		fdf_move_to_center(t_fdf *fdf);
+
 void		fdf_plot(t_fdf *fdf);
 
 int			fdf_key_press(int keycode, t_fdf *fdf);
@@ -153,8 +167,7 @@ void		fdf_rotate_x(double *y, double *z, double ang);
 void		fdf_rotate_y(double *x, double *z, double ang);
 void		fdf_rotate_z(double *x, double *y, double ang);
 
+void		fdf_shift(int key, t_fdf *fdf);
+void		fdf_add_shift(t_fdf *fdf, int flag, int dx, int dy);
 
-
-
-void		plot_line_br_1(void *mlx, void *win, double x0, double y0, double x1, double y1);
 # endif

@@ -9,9 +9,9 @@ include_directories(fdf/includes)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -framework OpenGL -framework AppKit")
 
 set(SOURCES srcs/main.c srcs/fdf_read.c srcs/fdf_error.c
-		srcs/fdf_atoi.c srcs/fdf_print_net.c srcs/fdf_print_map.c
+		srcs/fdf_atoi.c
 		srcs/fdf_plot.c srcs/fdf_plot_line.c srcs/matrix_operations.c
-		srcs/fdf_keyboard.c srcs/fdf_rotate.c srcs/fdf_init.c srcs/fdf_center.c srcs/fdf_color.c)
+		srcs/fdf_keyboard.c srcs/fdf_rotate.c srcs/fdf_init.c srcs/fdf_center.c srcs/fdf_color.c srcs/fdf_shift_zoom.c)
 
 set(HEADERS includes/fdf.h includes/mlx.h)
 

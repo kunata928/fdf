@@ -17,6 +17,8 @@ void		fdf_init_subj(t_fdf *fdf)
 	fdf->ang_x = 0;
 	fdf->ang_y = 0;
 	fdf->ang_z = 0;
+	fdf->shift_x = 0;
+	fdf->shift_y = 0;
 }
 
 void		fdf_copy_in_cur(t_fdf *fdf)
@@ -67,7 +69,7 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k - fdf->dx;
 			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k - fdf->dy;
 			fdf->pnt[w + h * fdf->wdth]->z = tmp * 10;
-			fdf->pnt[w + h * fdf->wdth]->color = WINE;
+			fdf->pnt[w + h * fdf->wdth]->color = fdf_color_peeks_deflt(tmp);
 			w++;
 		}
 		while (buff[fdf->i] == ' ')

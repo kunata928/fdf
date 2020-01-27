@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_print_net.c                                    :+:      :+:    :+:   */
+/*   fdf_shift_zoom.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,45 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <zconf.h>
 #include "../includes/fdf.h"
 
-/*void		print_0(t_fdf *fdf)
+void		fdf_add_shift(t_fdf *fdf, int flag, int dx, int dy)
 {
 	int i;
 
-	i = 1;
-	while (i < fdf->wdth)
+	i = 0;
+	while (i < fdf->wdth * fdf->hght)
 	{
-		print_line_br(fdf, *(fdf->pnt[i - 1]), *(fdf->pnt[i]));
-		i++;
-	}
-	i = 1;
-	while (i < fdf->hght)
-	{
-		print_line_br(fdf, *(fdf->pnt[(i-1) * fdf->wdth]),
-				*(fdf->pnt[i * fdf->wdth]));
+		if (flag)
+			(fdf->cur[i])->x = (int)((fdf->cur[i])->x + dx);
+		else
+			(fdf->cur[i])->y = (int)((fdf->cur[i])->y + dy);
 		i++;
 	}
 	return ;
 }
 
-void		fdf_print_net(t_fdf *fdf)
+void		fdf_shift(int key, t_fdf *fdf)
 {
-	fdf->h = 1;
-	print_0(fdf);
-	while (fdf->h < fdf->hght)
-	{
-		fdf->w = 1;
-		while (fdf->w < fdf->wdth)
-		{
-			print_line_br(fdf, *(fdf->pnt[(fdf->h - 1) * fdf->wdth + fdf->w]),
-					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
-			print_line_br(fdf, *(fdf->pnt[fdf->h * fdf->wdth + fdf->w - 1]),
-					*(fdf->pnt[fdf->h * fdf->wdth + fdf->w]));
-			fdf->w += 1;
-		}
-		fdf->h += 1;
-	}
-	return ;
-}*/
+	int dx;
+	int dy;
+
+	dx = 0;
+	dy = 0;
+	if (key == KEY_NUM_LEFT)
+		dx -= SHIFT_STEP;
+	else if (key == KEY_NUM_RIGHT)
+		dx += SHIFT_STEP;
+	else if (key == KEY_NUM_DOWN)
+		dy += SHIFT_STEP;
+	else if (key == KEY_NUM_UP)
+		dy -= SHIFT_STEP;
+	if (key == KEY_NUM_LEFT || key == KEY_NUM_RIGHT)
+		fdf_add_shift(fdf, 1, dx, dy);
+	if (key == KEY_NUM_DOWN || key == KEY_NUM_UP)
+		fdf_add_shift(fdf, 0, dx, dy);
+	fdf_plot(fdf);
+	fdf->kx += dx;
+	fdf->ky += dy;
+	fdf->shift_x -= dx;
+	fdf->shift_y -= dy;
+}

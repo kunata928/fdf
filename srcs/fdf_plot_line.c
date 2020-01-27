@@ -57,7 +57,8 @@ void		plot_line_br(t_fdf *fdf, int i0, int i1)
 		if (fdf->tmp.x >= 0 && fdf->tmp.x < WINSIZEX
 		&& fdf->tmp.y >= 0 && fdf->tmp.y < WINSIZEY)
 			*(int*)(fdf->image + (int)(fdf->tmp.x) * 4 +
-					(int)(fdf->tmp.y) * fdf->s_line) = 0xFFFF;
+					(int)(fdf->tmp.y) * fdf->s_line) =
+							color_pnt_deflt(*fdf, br->x, i0, i1);
 		br->error -= br->dy;
 		if (br->error < 0)
 		{

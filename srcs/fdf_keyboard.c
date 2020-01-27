@@ -18,7 +18,10 @@ int		fdf_check_key(int keycode)
 			keycode == KEY_NUM_UP || keycode == KEY_NUM_DOWN ||
 			keycode == KEY_NUM_4 || keycode == KEY_NUM_6 ||
 			keycode == KEY_NUM_2 || keycode == KEY_NUM_8 ||
-			keycode == KEY_NUM_1 || keycode == KEY_NUM_3)
+			keycode == KEY_NUM_1 || keycode == KEY_NUM_3 ||
+			keycode == KEY_NUM_UP || keycode == KEY_NUM_DOWN ||
+			keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT ||
+			keycode == KEY_SPACE)
 		return (1);
 	return (0);
 }
@@ -32,6 +35,11 @@ int		fdf_key_press(int keycode, t_fdf *fdf)
 		if (keycode == KEY_NUM_4 || keycode == KEY_NUM_6 || keycode == KEY_NUM_2
 		|| keycode == KEY_NUM_8 || keycode == KEY_NUM_1 || keycode == KEY_NUM_3)
 			fdf_rotate(keycode, fdf);
+		else if (keycode == KEY_NUM_UP || keycode == KEY_NUM_DOWN ||
+		keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT)
+			fdf_shift(keycode, fdf);
+		else if (keycode == KEY_SPACE)
+			fdf_move_to_center(fdf);
 	}
 	return (0);
 }
