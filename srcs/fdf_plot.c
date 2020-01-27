@@ -36,5 +36,5 @@ void		fdf_plot(t_fdf *fdf)
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
 	mlx_destroy_image(fdf->mlx, fdf->img_ptr);
-	return;
+	return ;
 }

@@ -20,8 +20,6 @@ int			norm_sign(char c)
 		return (0);
 }
 
-
-
 void		fdf_count_numbers(char *str, int *len)
 {
 	while (*(str + *len) && (*(str + *len) == ' '))
@@ -45,7 +43,6 @@ int			read_first_line(char *buff)
 	while (buff[i] != '\n')
 	{
 		len = 0;
-
 		if (!(norm_sign(buff[i])))
 			fdf_error();
 		fdf_count_numbers(&buff[i], &len);

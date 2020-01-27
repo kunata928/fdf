@@ -51,7 +51,6 @@ void		plot_line_br(t_fdf *fdf, int i0, int i1)
 	fdf_br_init(br, br->xy0, br->xy1);
 	while (br->x <= br->xy1.x)
 	{
-
 		fdf->tmp.x = br->dif ? br->y : br->x;
 		fdf->tmp.y = br->dif ? br->x : br->y;
 		if (fdf->tmp.x >= 0 && fdf->tmp.x < WINSIZEX

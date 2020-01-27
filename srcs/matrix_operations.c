@@ -19,8 +19,8 @@ void	fdf_rotate_x(double *y, double *z, double ang)
 
 	prev_y = *y;
 	prev_z = *z;
-	*y = fdf_doublebltoint(prev_y * cos(ang) + prev_z * sin(ang)); //prev_y * cos(ang) + prev_z * sin(ang);
-	*z = fdf_doublebltoint(-prev_y * sin(ang) + prev_z * cos(ang)); //-prev_y * sin(ang) + prev_z * cos(ang);
+	*y = fdf_doublebltoint(prev_y * cos(ang) + prev_z * sin(ang));
+	*z = fdf_doublebltoint(-prev_y * sin(ang) + prev_z * cos(ang));
 }
 
 void	fdf_rotate_y(double *x, double *z, double ang)
@@ -30,8 +30,8 @@ void	fdf_rotate_y(double *x, double *z, double ang)
 
 	prev_x = *x;
 	prev_z = *z;
-	*x = fdf_doublebltoint(prev_x * cos(ang) + prev_z * sin(ang)); //prev_x * cos(ang) + prev_z * sin(ang);
-	*z = fdf_doublebltoint(-prev_x * sin(ang) + prev_z * cos(ang)); //-prev_x * sin(ang) + prev_z * cos(ang);
+	*x = fdf_doublebltoint(prev_x * cos(ang) + prev_z * sin(ang));
+	*z = fdf_doublebltoint(-prev_x * sin(ang) + prev_z * cos(ang));
 }
 
 void	fdf_rotate_z(double *x, double *y, double ang)
@@ -41,8 +41,8 @@ void	fdf_rotate_z(double *x, double *y, double ang)
 
 	prev_x = *x;
 	prev_y = *y;
-	*x = fdf_doublebltoint(prev_x * cos(ang) - prev_y * sin(ang)); //prev_x * cos(ang) - prev_y * sin(ang);
-	*y = fdf_doublebltoint(prev_x * sin(ang) + prev_y * cos(ang));//prev_x * sin(ang) + prev_y * cos(ang);
+	*x = fdf_doublebltoint(prev_x * cos(ang) - prev_y * sin(ang));
+	*y = fdf_doublebltoint(prev_x * sin(ang) + prev_y * cos(ang));
 }
 
 void	fdf_eval_cur(t_fdf *fdf)
