@@ -8,19 +8,23 @@
 # include "../includes/mlx.h"
 # include "../libft/includes/libft.h"
 
+# define P_START			fdf.cur[start]
+# define P_END				fdf.cur[end]
+
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
 # define WINE				0xAB271D
 # define ROSE				0x9D788F
 # define DEF_COL			0xC488AC
 
-# define WINSIZEX			2000
-# define WINSIZEY			1500
+# define WINSIZEX			1000
+# define WINSIZEY			1000
 # define WINZERO			WINSIZEX/4
 # define BUFF				1000000
 # define ANG_STEP			0.01
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
+# define Z_KOEFF			5
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -76,6 +80,20 @@ typedef struct	s_val
 	int		nums;
 }				t_val;
 
+typedef struct	s_br
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	t_pnt	xy0;
+	t_pnt	xy1;
+	double	error;
+	int		steep;
+	int		ystep;
+	int		color;
+}				t_br;
+
 typedef struct	s_fdf
 {
 	double	ang_x;
@@ -97,6 +115,7 @@ typedef struct	s_fdf
 	t_pnt	**cur;
 
 	t_pnt	tmp;
+	t_br	br;
 	double	k;
 	int		kx;
 	int		ky;
@@ -110,19 +129,6 @@ typedef struct	s_fdf
 	int		w;
 	int		h;
 }				t_fdf;
-
-typedef struct	s_br
-{
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
-	t_pnt	xy0;
-	t_pnt	xy1;
-	double	error;
-	int		dif;
-	int		ystep;
-}				t_br;
 
 int			fdf_read_file(char *txt, t_fdf *fdf);
 int			count_enters(char *buff);
@@ -144,8 +150,8 @@ void		fdf_smthwrong();
 void		fdf_notvalid();
 
 void		fdf_swap(double *a, double *b, double *d, double *e);
-void		fdf_br_init(t_br *br, t_pnt xy0, t_pnt xy1);
-void		plot_line_br(t_fdf *fdf, int i0, int i1);
+void		fdf_br_init(t_fdf *fdf, int start, int end);
+void		plot_line_br(t_fdf fdf, int i0, int i1);
 
 int			fdf_atoi(const char *str, int *len);
 int			fdf_atoi_hex(const char *str);

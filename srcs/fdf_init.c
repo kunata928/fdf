@@ -68,7 +68,7 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 			fdf->i += len;
 			fdf->pnt[w + h * fdf->wdth]->x = w * fdf->k - fdf->dx;
 			fdf->pnt[w + h * fdf->wdth]->y = h * fdf->k - fdf->dy;
-			fdf->pnt[w + h * fdf->wdth]->z = tmp * 10;
+			fdf->pnt[w + h * fdf->wdth]->z = tmp * Z_KOEFF;
 			fdf->pnt[w + h * fdf->wdth]->color = fdf_color_peeks_deflt(tmp);
 			w++;
 		}

@@ -25,13 +25,13 @@ void		fdf_plot(t_fdf *fdf)
 	while (i++ < fdf->hght * fdf->wdth - 1)
 	{
 		if (fdf->hght * fdf->wdth - i < fdf->wdth)
-			plot_line_br(fdf, i, i + 1);
+			plot_line_br(*fdf, i, i + 1);
 		else if (i % (fdf->wdth) == 0 && i != 0)
-			plot_line_br(fdf, i, i + fdf->wdth);
+			plot_line_br(*fdf, i, i + fdf->wdth);
 		else
 		{
-			plot_line_br(fdf, i, i + fdf->wdth);
-			plot_line_br(fdf, i, i + 1);
+			plot_line_br(*fdf, i, i + fdf->wdth);
+			plot_line_br(*fdf, i, i + 1);
 		}
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
