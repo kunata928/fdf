@@ -28,7 +28,6 @@ int main(void)
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	//the matrix read correctly
-
 	//plot_line_br_1(fdf->mlx, fdf->win, 450, 624, 450, 499);
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);

@@ -27,24 +27,24 @@ int			get_light(double start, double end, double percent)
 	return ((int)((1 - percent) * start + percent * end));
 }
 
-int			fdf_get_color(t_fdf fdf, int start, int end)
+int			fdf_color(t_fdf fdf, int start, int end)
 {
 	int		red;
 	int		green;
 	int		blue;
 	double	percentage;
 
-	if (fdf.br.color == fdf.cur[end]->color)
+	if (fdf.br.color == fdf.br.col_end)
 		return (fdf.br.color);
 	if (fdf.br.dx > fdf.br.dy)
 		percentage = percent(P_START->x, P_END->x, fdf.br.x);
 	else
 		percentage = percent(P_START->y, P_END->y, fdf.br.y);
 	red = get_light((P_START->color >> 16) & 0xFF,
-					(P_END->color >> 16) & 0xFF, percentage);
+			(P_END->color >> 16) & 0xFF, percentage);
 	green = get_light((P_START->color >> 8) & 0xFF,
-					(P_END->color >> 8) & 0xFF, percentage);
+			(P_END->color >> 8) & 0xFF, percentage);
 	blue = get_light(P_START->color & 0xFF,
-						   P_END->color & 0xFF, percentage);
+			P_END->color & 0xFF, percentage);
 	return ((red << 16) | (green << 8) | blue);
 }

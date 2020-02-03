@@ -8,8 +8,8 @@
 # include "../includes/mlx.h"
 # include "../libft/includes/libft.h"
 
-# define P_START			fdf.cur[start]
-# define P_END				fdf.cur[end]
+# define P_START			fdf.cur[start - 1]
+# define P_END				fdf.cur[end - 1]
 
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
@@ -92,7 +92,20 @@ typedef struct	s_br
 	int		steep;
 	int		ystep;
 	int		color;
+	int		col_start;
+	int		col_end;
 }				t_br;
+
+typedef struct	s_curr
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	sx;
+	double	sy;
+	int		color;
+}				t_curr;
 
 typedef struct	s_fdf
 {
@@ -116,6 +129,7 @@ typedef struct	s_fdf
 
 	t_pnt	tmp;
 	t_br	br;
+	t_curr	*curr;
 	double	k;
 	int		kx;
 	int		ky;
@@ -145,6 +159,8 @@ void		fdf_set_coefficient(t_fdf *fdf);
 int			fdf_color_peeks_deflt(int tmp);
 int			color_pnt_deflt(t_fdf fdf, int i, int i0, int i1);
 
+int			fdf_color(t_fdf fdf, int start, int end);
+
 void		fdf_error();
 void		fdf_smthwrong();
 void		fdf_notvalid();
@@ -152,6 +168,7 @@ void		fdf_notvalid();
 void		fdf_swap(double *a, double *b, double *d, double *e);
 void		fdf_br_init(t_fdf *fdf, int start, int end);
 void		plot_line_br(t_fdf fdf, int i0, int i1);
+void		set_line(t_fdf fdf, int start, int end);
 
 int			fdf_atoi(const char *str, int *len);
 int			fdf_atoi_hex(const char *str);

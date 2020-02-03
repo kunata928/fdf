@@ -14,6 +14,8 @@
 
 int		color_pnt_deflt(t_fdf fdf, int i, int i0, int i1)
 {
+	if (fdf.br.col_start == fdf.br.col_end)
+		return (fdf.br.col_start);
 	if (((fdf.cur)[i0 - 1]->x == fdf.tmp.x) &&
 	((fdf.cur)[i0 - 1])->y == fdf.tmp.y)
 		return ((fdf.cur)[i0 - 1]->color);
