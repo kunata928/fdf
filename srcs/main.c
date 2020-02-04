@@ -28,13 +28,19 @@ int main(void)
 
 	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
 	//the matrix read correctly
-	//plot_line_br_1(fdf->mlx, fdf->win, 450, 624, 450, 499);
+
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
-
 	mlx_loop(fdf->mlx);
 	return (0);
 	//free(fdf);
 }
+//mlx_clear_window(fdf->mlx, fdf->win);
+//fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZEX, WINSIZEY);
+//fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
+//							   &fdf->s_line, &fdf->endian);
+//set_line(*fdf, 1, 2);
+//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
+//	mlx_destroy_image(fdf->mlx, fdf->img_ptr);

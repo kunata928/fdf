@@ -34,12 +34,12 @@ int			fdf_color(t_fdf fdf, int start, int end)
 	int		blue;
 	double	percentage;
 
-	if (fdf.br.color == fdf.br.col_end)
-		return (fdf.br.color);
-	if (fdf.br.dx > fdf.br.dy)
-		percentage = percent(P_START->x, P_END->x, fdf.br.x);
+	if (fdf.curr->color == P_END->color)
+		return (fdf.curr->color);
+	if (fdf.curr->dx > fdf.curr->dy)
+		percentage = percent(P_START->x, P_END->x, fdf.curr->x);
 	else
-		percentage = percent(P_START->y, P_END->y, fdf.br.y);
+		percentage = percent(P_START->y, P_END->y, fdf.curr->y);
 	red = get_light((P_START->color >> 16) & 0xFF,
 			(P_END->color >> 16) & 0xFF, percentage);
 	green = get_light((P_START->color >> 8) & 0xFF,

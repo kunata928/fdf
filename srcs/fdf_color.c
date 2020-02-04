@@ -12,6 +12,17 @@
 
 #include "../includes/fdf.h"
 
+int		color_pnt(t_fdf fdf, int start, int end)
+{
+	if (fdf.curr->color == P_END->color)
+		return (fdf.curr->color);
+	if (fdf.curr->x == P_START->x && fdf.curr->y == P_START->y)
+		return (P_START->color);
+	if (fdf.curr->x == P_END->x && fdf.curr->y == P_END->y)
+		return (P_END->color);
+	return (DEF_COL);
+}
+
 int		color_pnt_deflt(t_fdf fdf, int i, int i0, int i1)
 {
 	if (fdf.br.col_start == fdf.br.col_end)

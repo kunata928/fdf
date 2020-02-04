@@ -103,6 +103,7 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
 			fdf_smthwrong();
 		i++;
 	}
+	fdf->curr = (t_curr *)ft_memalloc(sizeof(t_curr));
 	fdf_set_coefficient(fdf);
 	validate(buff, fdf, fdf->wdth);
 	return ;

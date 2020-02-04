@@ -21,7 +21,7 @@
 # define WINSIZEY			1000
 # define WINZERO			WINSIZEX/4
 # define BUFF				1000000
-# define ANG_STEP			0.01
+# define ANG_STEP			0.05
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
 # define Z_KOEFF			5
@@ -160,6 +160,7 @@ int			fdf_color_peeks_deflt(int tmp);
 int			color_pnt_deflt(t_fdf fdf, int i, int i0, int i1);
 
 int			fdf_color(t_fdf fdf, int start, int end);
+int			color_pnt(t_fdf fdf, int start, int end);
 
 void		fdf_error();
 void		fdf_smthwrong();
