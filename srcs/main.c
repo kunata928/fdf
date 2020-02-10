@@ -13,22 +13,20 @@
 #include "../includes/fdf.h"
 #include <stdio.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
-	t_fdf		*fdf;
-	int			i;
-	t_pnt xy0;
-	t_pnt xy1;
+	int		fd;
+	t_fdf	*fdf;
 
-	i = 0;
+	//if (!(fdf_open(argc, argv, &fd)))
+	//	return (0);
 
+	fd = open("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", O_RDONLY);
 	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
-	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, WINSIZEX, WINSIZEY, "Title");
-
-	fdf_read_file("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", fdf);
+	if (!(fdf_read_file(fd, fdf,
+			"/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf"))) //argv[1]
+		return (0);
 	//the matrix read correctly
-
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);

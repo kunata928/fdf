@@ -12,6 +12,8 @@
 
 #include "../includes/fdf.h"
 
+
+
 int		fdf_check_key(int keycode)
 {
 	if (keycode == KEY_ESC || keycode == KEY_SPACE ||
@@ -21,7 +23,7 @@ int		fdf_check_key(int keycode)
 			keycode == KEY_NUM_1 || keycode == KEY_NUM_3 ||
 			keycode == KEY_NUM_UP || keycode == KEY_NUM_DOWN ||
 			keycode == KEY_NUM_LEFT || keycode == KEY_NUM_RIGHT ||
-			keycode == KEY_SPACE)
+			keycode == KEY_SPACE || keycode == KEY_H)
 		return (1);
 	return (0);
 }

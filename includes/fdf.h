@@ -16,10 +16,12 @@
 # define WINE				0xAB271D
 # define ROSE				0x9D788F
 # define DEF_COL			0xC488AC
+# define TEXT_COL0			0x9D828F
+# define TEXT_COL1			0xAF6C93
+# define TEXT_COL2			0xD54E94
 
 # define WINSIZEX			1000
 # define WINSIZEY			1000
-# define WINZERO			WINSIZEX/4
 # define BUFF				1000000
 # define ANG_STEP			0.05
 # define SHIFT_STEP			5
@@ -32,21 +34,13 @@
 # define MOUSE_SCROLL_DOWN	5
 # define MOUSE_BUTTON_MID	3
 # define KEY_ESC			53
-# define KEY_CTRL_LEFT		256
-# define KEY_SHIFT_LEFT		257
-# define KEY_F				3
 # define KEY_H				4
-# define KEY_S				1
 # define KEY_Z				6
 # define KEY_X				7
 # define KEY_I				34
-# define KEY_T				17
-# define KEY_E				14
 # define KEY_R				15
 # define KEY_G				5
 # define KEY_B				11
-# define KEY_Q				12
-# define KEY_W				13
 # define KEY_SPACE			49
 # define KEY_PLUS			69
 # define KEY_MINUS			78
@@ -55,9 +49,7 @@
 # define KEY_NUM_3			85
 # define KEY_NUM_4			86
 # define KEY_NUM_6			88
-# define KEY_NUM_7			89
 # define KEY_NUM_8			91
-# define KEY_NUM_9			92
 # define KEY_NUM_UP			126
 # define KEY_NUM_DOWN		125
 # define KEY_NUM_LEFT		123
@@ -80,22 +72,6 @@ typedef struct	s_val
 	int		nums;
 }				t_val;
 
-typedef struct	s_br
-{
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
-	t_pnt	xy0;
-	t_pnt	xy1;
-	double	error;
-	int		steep;
-	int		ystep;
-	int		color;
-	int		col_start;
-	int		col_end;
-}				t_br;
-
 typedef struct	s_curr
 {
 	double	x;
@@ -107,6 +83,11 @@ typedef struct	s_curr
 	int		color;
 }				t_curr;
 
+typedef struct	s_cond
+{
+	int		help;
+}				t_cond;
+
 typedef struct	s_fdf
 {
 	double	ang_x;
@@ -115,7 +96,6 @@ typedef struct	s_fdf
 	int		shift_x;
 	int		shift_y;
 
-
 	void	*mlx;
 	void	*win;
 	void	*img_ptr;
@@ -123,12 +103,12 @@ typedef struct	s_fdf
 	int		bpp;
 	int		s_line;
 	int		endian;
+	char	*map_name;
 
 	t_pnt	**pnt;
 	t_pnt	**cur;
+	t_cond	condition;
 
-	t_pnt	tmp;
-	t_br	br;
 	t_curr	*curr;
 	double	k;
 	int		kx;
@@ -139,20 +119,21 @@ typedef struct	s_fdf
 	int		wdth;
 
 	int		i;
-	int		j;
-	int		w;
 	int		h;
 }				t_fdf;
 
-int			fdf_read_file(char *txt, t_fdf *fdf);
+int			fdf_open(int argc, char **argv, int *fd);
+int			fdf_close(void *param);
+
+int			fdf_read_file(int fd, t_fdf *fdf, char *map_name);
 int			count_enters(char *buff);
 int			read_first_line(char *buff);
 void		fdf_count_numbers(char *str, int *len);
 int			norm_sign(char c);
 
-void		fdf_malloc_fdf(char *buff, t_fdf *fdf);
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name);
 void		validate(char *buff, t_fdf *fdf, int nums);
-void		fdf_init_subj(t_fdf *fdf);
+void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff);
 void		fdf_copy_in_cur(t_fdf *fdf);
 void		fdf_set_coefficient(t_fdf *fdf);
 
@@ -193,5 +174,9 @@ void		fdf_rotate_z(double *x, double *y, double ang);
 
 void		fdf_shift(int key, t_fdf *fdf);
 void		fdf_add_shift(t_fdf *fdf, int flag, int dx, int dy);
+
+void		fdf_info_static0(t_fdf fdf);
+void		fdf_info_static1(t_fdf fdf);
+void		fdf_info_help(t_fdf fdf);
 
 # endif

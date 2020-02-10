@@ -12,13 +12,18 @@
 
 #include "../includes/fdf.h"
 
-void		fdf_init_subj(t_fdf *fdf)
+void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff)
 {
 	fdf->ang_x = 0;
 	fdf->ang_y = 0;
 	fdf->ang_z = 0;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
+	fdf->mlx = mlx_init();
+	fdf->win = mlx_new_window(fdf->mlx, WINSIZEX, WINSIZEY, "Title");
+	fdf->map_name = txt;
+	fdf->hght = count_enters(buff);
+	fdf->wdth = read_first_line(buff);
 }
 
 void		fdf_copy_in_cur(t_fdf *fdf)
@@ -82,13 +87,12 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 	return ;
 }
 
-void		fdf_malloc_fdf(char *buff, t_fdf *fdf)
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name)
 {
 	int i;
 
 	i = 0;
-	fdf->hght = count_enters(buff);
-	fdf->wdth = read_first_line(buff);
+	fdf_init_subj(fdf, map_name, buff);
 	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
 			* (fdf->hght * fdf->wdth))) == NULL)
 		fdf_smthwrong();

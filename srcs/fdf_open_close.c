@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_color.c                                        :+:      :+:    :+:   */
+/*   fdf_open_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,24 +12,24 @@
 
 #include "../includes/fdf.h"
 
-int		color_pnt(t_fdf fdf, int start, int end)
+int		fdf_open(int argc, char **argv, int *fd)
 {
-	if (fdf.curr->color == P_END->color)
-		return (fdf.curr->color);
-	if (fdf.curr->x == P_START->x && fdf.curr->y == P_START->y)
-		return (P_START->color);
-	if (fdf.curr->x == P_END->x && fdf.curr->y == P_END->y)
-		return (P_END->color);
-	return (DEF_COL);
+	if (argc != 2)
+	{
+		ft_putendl("Usage: ./fdf source_file.fdf");
+		return (0);
+	}
+	if ((*fd = open(argv[1], O_RDONLY)) == -1)
+	{
+		ft_putendl("error");
+		return (0);
+	}
+	return (1);
 }
 
-int		fdf_color_peeks_deflt(int tmp)
+int		fdf_close(void *param)
 {
-	if (tmp > 0)
-		return (WHITE);
-	if (tmp < 0)
-		return (WINE);
-	if (tmp == 0)
-		return (ROSE);
+	(void)param;
+	exit(0);
+	return (0);
 }
-

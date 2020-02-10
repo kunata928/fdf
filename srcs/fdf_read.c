@@ -68,14 +68,11 @@ int			count_enters(char *buff)
 	return (cnt);
 }
 
-int			fdf_read_file(char *txt, t_fdf *fdf)
+int			fdf_read_file(int fd, t_fdf *fdf, char *map_name)
 {
-	int		fd;
 	int		len;
 	char	buff[BUFF + 2];
 
-	if ((fd = open(txt, O_RDONLY)) < 0)
-		fdf_error();
 	if (!(len = read(fd, buff, BUFF)))
 		fdf_error();
 	if (buff[len - 1] != '\n')
@@ -85,6 +82,6 @@ int			fdf_read_file(char *txt, t_fdf *fdf)
 	}
 	else
 		buff[len] = '\0';
-	fdf_malloc_fdf(buff, fdf);
+	fdf_malloc_fdf(buff, fdf, map_name);
 	return (1);
 }
