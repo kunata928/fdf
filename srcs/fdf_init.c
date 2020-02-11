@@ -19,6 +19,8 @@ void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff)
 	fdf->ang_z = 0;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
+	fdf->h_peek = 0;
+	fdf->condition.help = 0;
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, WINSIZEX, WINSIZEY, "Title");
 	fdf->map_name = txt;

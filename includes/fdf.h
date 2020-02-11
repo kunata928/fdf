@@ -20,13 +20,15 @@
 # define TEXT_COL1			0xAF6C93
 # define TEXT_COL2			0xD54E94
 
-# define WINSIZEX			1000
-# define WINSIZEY			1000
+# define WINSIZEX			2000
+# define WINSIZEY			1500
+# define H_Y				WINSIZEX - 200
 # define BUFF				1000000
 # define ANG_STEP			0.05
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
 # define Z_KOEFF			5
+# define DZ					0.5
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -35,6 +37,7 @@
 # define MOUSE_BUTTON_MID	3
 # define KEY_ESC			53
 # define KEY_H				4
+# define KEY_T				17
 # define KEY_Z				6
 # define KEY_X				7
 # define KEY_I				34
@@ -49,7 +52,9 @@
 # define KEY_NUM_3			85
 # define KEY_NUM_4			86
 # define KEY_NUM_6			88
+# define KEY_NUM_7			89
 # define KEY_NUM_8			91
+# define KEY_NUM_9			92
 # define KEY_NUM_UP			126
 # define KEY_NUM_DOWN		125
 # define KEY_NUM_LEFT		123
@@ -111,6 +116,7 @@ typedef struct	s_fdf
 
 	t_curr	*curr;
 	double	k;
+	double	h_peek;
 	int		kx;
 	int		ky;
 	int		dx;
@@ -178,5 +184,10 @@ void		fdf_add_shift(t_fdf *fdf, int flag, int dx, int dy);
 void		fdf_info_static0(t_fdf fdf);
 void		fdf_info_static1(t_fdf fdf);
 void		fdf_info_help(t_fdf fdf);
+
+void		fdf_plot_isometry(t_fdf *fdf);
+void		fdf_plot_top_view(t_fdf *fdf);
+void		fdf_plot_front_view(t_fdf *fdf);
+void		fdf_change_height(t_fdf *fdf, int key);
 
 # endif

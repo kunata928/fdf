@@ -18,6 +18,8 @@ void		fdf_info_static0(t_fdf fdf)
 
 	mlx_string_put(fdf.mlx, fdf.win, 0, 0,
 				   TEXT_COL0, fdf.map_name);
+	mlx_string_put(fdf.mlx, fdf.win, 0, 18,
+				   TEXT_COL0, "Press <Esc> to exit");
 	mlx_string_put(fdf.mlx, fdf.win,
 				   WINSIZEX - 150, 5, TEXT_COL1, "Shift dx:");
 	txt = ft_itoa(-fdf.shift_x);
@@ -53,12 +55,31 @@ void		fdf_info_static1(t_fdf fdf)
 	mlx_string_put(fdf.mlx, fdf.win,
 			WINSIZEX - 57, 77, TEXT_COL2, txt);
 	free(txt);
-	//fdf_info_static1(fdf);
 }
 
 void		fdf_info_help(t_fdf fdf)
 {
 	mlx_string_put(fdf.mlx, fdf.win,
-			5, WINSIZEX - 23, TEXT_COL0, "Press <H> for help");
-	//if (fdf)
+			5, WINSIZEX - 23, TEXT_COL0, "Press <h> for help");
+	if (fdf.condition.help)
+	{
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 18,
+				TEXT_COL0, "Press    <4> or <6>     to rotate plato around Ox");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 36,
+				TEXT_COL0, "Press    <2> or <8>     to rotate plato around Oy");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 54,
+				TEXT_COL0, "Press    <1> or <3>     to rotate plato around Oz");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 77,
+				TEXT_COL0, "Press <left> or <right> to move plato along Ox");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 95,
+				TEXT_COL0, "Press   <up> or <down>  to move plato along Oy");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 95,
+				TEXT_COL0, "Press   <up> or <down>  to move plato along Oy");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 118,
+				TEXT_COL0, "Press   <i>   for isometry projection");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 136,
+				TEXT_COL0, "Press   <t>   for    top   projection");
+		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 159,
+				TEXT_COL0, "Press   <7> or <9>   for changing height ");
+	}
 }
