@@ -86,7 +86,6 @@ void		validate(char *buff, t_fdf *fdf, int nums)
 		fdf->i += 1;
 		h++;
 	}
-	return ;
 }
 
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name)

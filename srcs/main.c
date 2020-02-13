@@ -21,10 +21,10 @@ int main(int argc, char **argv)
 	//if (!(fdf_open(argc, argv, &fd)))
 	//	return (0);
 
-	fd = open("/Users/pmelodi/Projects/fdf0/test_maps/mars.fdf", O_RDONLY);
+	fd = open("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", O_RDONLY);
 	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
 	if (!(fdf_read_file(fd, fdf,
-			"/Users/pmelodi/Projects/fdf0/test_maps/mars.fdf"))) //argv[1]
+			"/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf"))) //argv[1]
 		return (0);
 	//the matrix read correctly
 	fdf_copy_in_cur(fdf);

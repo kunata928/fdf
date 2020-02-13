@@ -1,6 +1,9 @@
 #ifndef FDF_H
 # define FDF_H
 
+#include <stdio.h>
+
+
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -10,6 +13,7 @@
 
 # define P_START			fdf.cur[start - 1]
 # define P_END				fdf.cur[end - 1]
+# define P_CURR				(fdf->pnt[i])
 
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
@@ -20,15 +24,15 @@
 # define TEXT_COL1			0xAF6C93
 # define TEXT_COL2			0xD54E94
 
-# define WINSIZEX			2000
-# define WINSIZEY			1500
+# define WINSIZEX			1500
+# define WINSIZEY			1000
 # define H_Y				WINSIZEX - 200
 # define BUFF				1000000
 # define ANG_STEP			0.05
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
 # define Z_KOEFF			5
-# define DZ					0.5
+# define DZ					1
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -69,6 +73,7 @@ typedef struct	s_pnt
 	double	ang_y;
 	double	ang_z;
 	int		color;
+	double	h_peek;
 }				t_pnt;
 
 typedef struct	s_val
