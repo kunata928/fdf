@@ -74,6 +74,7 @@ int		fdf_atoi_hex(const char *str)
 	if (!str || *(str) != '0' || *(str + 1) != 'x')
 		return (-1);
 	i = 2;
+	num = 0;
 	while (!str[i] || (str[i] >= '0' && str[i] <= '9') ||
 	(str[i] >= 'a' && str[i] <= 'f') ||
 	(str[i] >= 'A' && str[i] <= 'F'))

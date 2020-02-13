@@ -18,7 +18,8 @@
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
 # define WINE				0xAB271D
-# define ROSE				0x9D788F
+# define ROSE				0xCC2950
+# define STRONG_ROSE		0x9D788F
 # define DEF_COL			0xC488AC
 # define TEXT_COL0			0x9D828F
 # define TEXT_COL1			0xAF6C93
@@ -26,7 +27,7 @@
 
 # define WINSIZEX			1500
 # define WINSIZEY			1000
-# define H_Y				WINSIZEX - 200
+# define H_Y				WINSIZEY - 225
 # define BUFF				1000000
 # define ANG_STEP			0.05
 # define SHIFT_STEP			5
@@ -143,7 +144,7 @@ void		fdf_count_numbers(char *str, int *len);
 int			norm_sign(char c);
 
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name);
-void		validate(char *buff, t_fdf *fdf, int nums);
+void validate(char *buff, t_fdf *fdf);
 void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff);
 void		fdf_copy_in_cur(t_fdf *fdf);
 void		fdf_set_coefficient(t_fdf *fdf);

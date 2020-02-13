@@ -10,45 +10,56 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = fdf
 
-OBJ_PATH :=	.obj/
-SRC_PATH :=	srcs/
-INC_PATH :=	includes/
-LBR_PATH := libft/
+SRC_PATH :=		srcs/
+INC_PATH :=		includes/
+LIB_PATH :=		libft/
+MLX_PATH :=		minilibx/
+OBJ_PATH :=		.obj/
 
 CC :=		gcc
 CFLAGS :=	-g -Wall -Wextra -Werror
-IFLAGS :=	-I $(INC_PATH)
-LFLAGS :=
+IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
+LFLAGS :=   -lft -L $(LIB_PATH)
+MLXFLAGS :=	-lmlx -framework OpenGL -framework AppKit
 
+HFILES :=	fdf
 
-HFILES :=	mlx fdf
+FILES :=  main fdf_read fdf_error fdf_atoi fdf_plot \
+        fdf_plot_line matrix_operations \
+        fdf_keyboard fdf_rotate fdf_init \
+        fdf_center fdf_color fdf_shift_zoom \
+        fdf_color_gradient fdf_menu fdf_open_close \
+        fdf_isometry \
 
-FILES :=  main \
+LIB :=		$(LIB_PATH)libft.a
+MLX :=		$(MLX_PATH)libmlx.a
 
 HDRS =		$(addprefix $(INC_PATH), $(addsuffix .h, $(HFILES)))
-SRC =		$(addprefix $(SRC_PATH), $(addsuffix .c, $(FILES)))
-OBJS =		$(addprefix $(OBJ_PATH), $(addsuffix .o, $(FILES)))
+SRCS =		$(addprefix $(SRC_PATH), $(addsuffix .c, $(FILES)))
+OBJS =		$(addprefix $(OBJ_PATH), $(SRCS:%.c=%.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_PATH) $(OBJS)
-	@ar rc libft.a $(OBJS)
-	@ranlib libft.a
+$(NAME): $(LIB) $(OBJ_PATH) $(OBJS) $(MLX)
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(LFLAGS) $(OBJS) -o $(NAME) $(MLX) $(MLXFLAGS)
+
+$(LIB):
+	@ $(MAKE) -C $(dir $@) $(notdir $@)
 
 $(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)
-	@echo $(NAME): $(OBJ_PATH) was created
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HDRS)
-	@$(CC) $(CFLAGS) -c $(IFLAGS) $< -o $@
+	mkdir -p $(OBJ_PATH)$(SRC_PATH)
+$(OBJ_PATH)%.o: %.c $(HDRS)
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJS)
-	rm -rf $(OBJ_PATH)
+	rm -f $(OBJS)
+	make clean -C $(LIB_PATH)
 
-fclean: clean
-	@rm -rf libft.a
+fclean:
+	rm -f $(NAME)
+	rm -rf $(OBJ_PATH)
+	make fclean -C $(LIB_PATH)
 
 re: fclean all

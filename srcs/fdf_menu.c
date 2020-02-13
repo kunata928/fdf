@@ -27,6 +27,7 @@ void		fdf_info_static0(t_fdf fdf)
 				   WINSIZEX - 57, 5, TEXT_COL2, txt);
 	mlx_string_put(fdf.mlx, fdf.win,
 				   WINSIZEX - 150, 23, TEXT_COL1, "Shift dy:");
+	free(txt);
 	txt = ft_itoa(-fdf.shift_y);
 	mlx_string_put(fdf.mlx, fdf.win,
 				   WINSIZEX - 57, 23, TEXT_COL2, txt);
@@ -46,11 +47,13 @@ void		fdf_info_static1(t_fdf fdf)
 			WINSIZEX - 57, 41, TEXT_COL2, txt);
 	mlx_string_put(fdf.mlx, fdf.win,
 			WINSIZEX - 150, 59, TEXT_COL1, "Angle Oy:");
+	free(txt);
 	txt = ft_itoa((int)(fdf.ang_y * 180 / M_PI) % 360);
 	mlx_string_put(fdf.mlx, fdf.win,
 			WINSIZEX - 57, 59, TEXT_COL2, txt);
 	mlx_string_put(fdf.mlx, fdf.win,
 			WINSIZEX - 150, 77, TEXT_COL1, "Angle Oz:");
+	free(txt);
 	txt = ft_itoa((int)(fdf.ang_z * 180 / M_PI) % 360);
 	mlx_string_put(fdf.mlx, fdf.win,
 			WINSIZEX - 57, 77, TEXT_COL2, txt);
@@ -60,7 +63,7 @@ void		fdf_info_static1(t_fdf fdf)
 void		fdf_info_help(t_fdf fdf)
 {
 	mlx_string_put(fdf.mlx, fdf.win,
-			5, WINSIZEX - 23, TEXT_COL0, "Press <h> for help");
+			5, WINSIZEY - 23, TEXT_COL0, "Press <h> for help");
 	if (fdf.condition.help)
 	{
 		mlx_string_put(fdf.mlx, fdf.win, 5, H_Y + 18,

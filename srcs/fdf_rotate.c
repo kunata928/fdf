@@ -30,6 +30,17 @@ void		fdf_rotate(int keycode, t_fdf *fdf)
 	else if (keycode == KEY_NUM_3)
 		fdf->ang_z += ANG_STEP;
 	fdf_copy_in_cur(fdf);
+	while (i < fdf->wdth * fdf->hght)
+	{
+		if (((fdf->pnt[i])->z != 0))
+		{
+			if (((fdf->pnt[i])->z + fdf->h_peek >= 0))
+				(fdf->cur[i])->z = (fdf->cur[i])->z + fdf->h_peek;
+			else
+				(fdf->cur[i])->z = 0;
+		}
+		i++;
+	}
 	fdf_eval_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);

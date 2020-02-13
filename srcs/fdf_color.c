@@ -29,7 +29,6 @@ int		fdf_color_peeks_deflt(int tmp)
 		return (WHITE);
 	if (tmp < 0)
 		return (WINE);
-	if (tmp == 0)
-		return (ROSE);
+	return (ROSE);
 }
 

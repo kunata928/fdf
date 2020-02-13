@@ -18,15 +18,11 @@ int main(int argc, char **argv)
 	int		fd;
 	t_fdf	*fdf;
 
-	//if (!(fdf_open(argc, argv, &fd)))
-	//	return (0);
-
-	fd = open("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", O_RDONLY);
-	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
-	if (!(fdf_read_file(fd, fdf,
-			"/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf"))) //argv[1]
+	if (!(fdf_open(argc, argv, &fd)))
 		return (0);
-	//the matrix read correctly
+	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
+	if (!(fdf_read_file(fd, fdf, argv[1])))
+		return (0);
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);

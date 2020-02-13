@@ -54,7 +54,7 @@ void		fdf_set_coefficient(t_fdf *fdf)
 	fdf->dy = (int)(((fdf->hght - 1) * fdf->k) / 2);
 }
 
-void		validate(char *buff, t_fdf *fdf, int nums)
+void validate(char *buff, t_fdf *fdf)
 {
 	int len;
 	int h;
@@ -110,6 +110,6 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name)
 	}
 	fdf->curr = (t_curr *)ft_memalloc(sizeof(t_curr));
 	fdf_set_coefficient(fdf);
-	validate(buff, fdf, fdf->wdth);
+	validate(buff, fdf);
 	return ;
 }
