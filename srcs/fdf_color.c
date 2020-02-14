@@ -32,3 +32,18 @@ int		fdf_color_peeks_deflt(int tmp)
 	return (ROSE);
 }
 
+int		fdf_set_color(char *buff, int *len)
+{
+	int i;
+
+	i = 0;
+	if (buff[i] && (buff[i] == ' ' || buff[i] == '\n'))
+	{
+		*len = 1;
+		return (DEF_COL);
+	}
+	if (buff[i] == ',')
+		return (fdf_atoi_hex(&(buff[i + 1]), len));
+	fdf_error();
+	return (0);
+}

@@ -267,3 +267,7 @@ int		color_pnt_deflt(t_fdf fdf, int i, int i0, int i1)
 		return ((fdf.cur)[i1 - 1]->color);
 	return (DEF_COL);
 }
+
+
+
+1,0xff 2 1,0xff

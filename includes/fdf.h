@@ -144,13 +144,14 @@ void		fdf_count_numbers(char *str, int *len);
 int			norm_sign(char c);
 
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name);
-void validate(char *buff, t_fdf *fdf);
+void		validate(char *buff, t_fdf *fdf);
 void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff);
 void		fdf_copy_in_cur(t_fdf *fdf);
 void		fdf_set_coefficient(t_fdf *fdf);
 
 int			fdf_color_peeks_deflt(int tmp);
 int			color_pnt_deflt(t_fdf fdf, int i, int i0, int i1);
+int			fdf_set_color(char *buff, int *len);
 
 int			fdf_color(t_fdf fdf, int start, int end);
 int			color_pnt(t_fdf fdf, int start, int end);
@@ -165,7 +166,7 @@ void		plot_line_br(t_fdf fdf, int i0, int i1);
 void		set_line(t_fdf fdf, int start, int end);
 
 int			fdf_atoi(const char *str, int *len);
-int			fdf_atoi_hex(const char *str);
+int			fdf_atoi_hex(const char *str, int *len);
 int			fdf_blank(char ch);
 double		fdf_doublebltoint(double nbr);
 

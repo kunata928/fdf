@@ -12,6 +12,18 @@
 
 #include "../includes/fdf.h"
 
+void		fdf_copy_in_cur(t_fdf *fdf)
+{
+	int i;
+
+	i = 0;
+	while (i < fdf->wdth * fdf->hght)
+	{
+		*(fdf->cur[i]) = *(fdf->pnt[i]);
+		i++;
+	}
+}
+
 void		fdf_plot(t_fdf *fdf)
 {
 	int i;

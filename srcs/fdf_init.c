@@ -26,19 +26,10 @@ void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff)
 	fdf->map_name = txt;
 	fdf->hght = count_enters(buff);
 	fdf->wdth = read_first_line(buff);
+	printf("%d  %d", fdf->hght, fdf->wdth);
 }
 
-void		fdf_copy_in_cur(t_fdf *fdf)
-{
-	int i;
 
-	i = 0;
-	while (i < fdf->wdth * fdf->hght)
-	{
-		*(fdf->cur[i]) = *(fdf->pnt[i]);
-		i++;
-	}
-}
 
 void		fdf_set_coefficient(t_fdf *fdf)
 {
@@ -55,6 +46,73 @@ void		fdf_set_coefficient(t_fdf *fdf)
 }
 
 void validate(char *buff, t_fdf *fdf)
+{
+	int len;
+	int tmp;
+	int i;
+
+	i = 0;
+	while (buff[i] != '\n')
+	{
+		len = 0;
+		if (buff[i] == '\n')
+			fdf_error();
+		tmp = fdf_atoi(&buff[i], &len);
+		fdf->pnt[fdf->i]->x = (i % (fdf->wdth)) * fdf->k - fdf->dx;
+		fdf->pnt[fdf->i]->y = (i / (fdf->hght)) * fdf->k - fdf->dy;
+		fdf->pnt[fdf->i]->z = tmp * Z_KOEFF;
+		i += len;
+		fdf->pnt[fdf->i]->color = fdf_set_color(&(buff[i]), &len);
+		i += len;
+		fdf->i += 1;
+		while (buff[i] == ' ')
+			i += 1;
+		if (fdf->i % fdf->wdth == 0)
+		{
+			if (buff[i] != '\n')
+				fdf_error();
+			else
+			{
+				i++;
+				if (fdf->i == fdf->wdth * fdf->hght
+				&& buff[i] == '\n' && buff[i + 1] == '\0')
+					return ;
+				while (buff[i] == ' ')
+					i += 1;
+			}
+		}
+	}
+}
+
+void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name)
+{
+	int i;
+
+	i = 0;
+	fdf_init_subj(fdf, map_name, buff);
+	if ((fdf->pnt = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
+			* (fdf->hght * fdf->wdth))) == NULL)
+		fdf_smthwrong();
+	if ((fdf->cur = (t_pnt **)ft_memalloc(sizeof(t_pnt *)
+			* (fdf->hght * fdf->wdth))) == NULL)
+		fdf_smthwrong();
+	while (i < fdf->hght * fdf->wdth)
+	{
+		if ((fdf->pnt[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
+			fdf_smthwrong();
+		if ((fdf->cur[i] = (t_pnt *)ft_memalloc(sizeof(t_pnt))) == NULL)
+			fdf_smthwrong();
+		i++;
+	}
+	if ((fdf->curr = (t_curr *)ft_memalloc(sizeof(t_curr))) == NULL)
+		return (fdf_smthwrong());
+	fdf_set_coefficient(fdf);
+	validate(buff, fdf);
+	return ;
+}
+
+/*
+ * void validate(char *buff, t_fdf *fdf)
 {
 	int len;
 	int h;
@@ -113,3 +171,4 @@ void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name)
 	validate(buff, fdf);
 	return ;
 }
+ */

@@ -28,6 +28,22 @@ void		fdf_count_numbers(char *str, int *len)
 		*len += 1;
 	while (*(str + *len) && *(str + *len) >= '0' && *(str + *len) <= '9')
 		*len += 1;
+	if (*(str + *len) && *(str + *len) == ',')
+	{
+		*len += 1;
+		if (*(str + *len) && *(str + *len) == '0')
+		{
+			*len += 1;
+			if (*(str + *len) && *(str + *len) == 'x')
+			{
+				*len += 1;
+				while (*(str + *len) && (*(str + *len) >= '0' &&
+				*(str + *len) <= '9') || (*(str + *len) >= 'a' &&
+				*(str + *len) <= 'f'))
+					*len += 1;
+			}
+		}
+	}
 	while (*(str + *len) && (*(str + *len) == ' '))
 		*len += 1;
 }
@@ -75,7 +91,7 @@ int			fdf_read_file(int fd, t_fdf *fdf, char *map_name)
 
 	if (!(len = read(fd, buff, BUFF)))
 		fdf_error();
-	if (buff[len - 1] != '\n')
+	if (buff[len - 2] != '\n')
 	{
 		buff[len] = '\n';
 		buff[len + 1] = '\0';
