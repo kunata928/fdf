@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
 int main(int argc, char **argv)
 {
@@ -30,7 +29,6 @@ int main(int argc, char **argv)
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
 	mlx_loop(fdf->mlx);
 	return (0);
-	//free(fdf);
 }
 //mlx_clear_window(fdf->mlx, fdf->win);
 //fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZEX, WINSIZEY);

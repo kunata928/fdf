@@ -57,32 +57,18 @@ void		fdf_plot_front_view(t_fdf *fdf)
 void		fdf_change_height(t_fdf *fdf, int key)
 {
 	int i;
-	int h_peek;
 
 	i = 0;
-	h_peek = 0;
 	if (key == KEY_NUM_7)
-		h_peek -= DZ;
+		fdf->h_peek = fdf->h_peek - DZ;
 	else
-		h_peek += DZ;
+		fdf->h_peek = fdf->h_peek + DZ;
 	fdf_copy_in_cur(fdf);
 	while (i < fdf->wdth * fdf->hght)
 	{
-		if (((fdf->pnt[i])->z != 0))
-		{
-			if (((fdf->pnt[i])->z + fdf->h_peek + h_peek >= 0))
-			{
-				(fdf->cur[i])->z = (fdf->cur[i])->z + h_peek + fdf->h_peek;
-			}
-			else
-			{
-				(fdf->cur[i])->z = 0;
-				h_peek = 0;
-			}
-		}
+		(fdf->cur[i])->z = (int)((fdf->cur[i])->z * fdf->h_peek);
 		i++;
 	}
-	fdf->h_peek += h_peek;
 	fdf_eval_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);

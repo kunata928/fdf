@@ -32,13 +32,7 @@ void		fdf_rotate(int keycode, t_fdf *fdf)
 	fdf_copy_in_cur(fdf);
 	while (i < fdf->wdth * fdf->hght)
 	{
-		if (((fdf->pnt[i])->z != 0))
-		{
-			if (((fdf->pnt[i])->z + fdf->h_peek >= 0))
-				(fdf->cur[i])->z = (fdf->cur[i])->z + fdf->h_peek;
-			else
-				(fdf->cur[i])->z = 0;
-		}
+		(fdf->cur[i])->z = (fdf->cur[i])->z * fdf->h_peek;
 		i++;
 	}
 	fdf_eval_cur(fdf);

@@ -87,7 +87,7 @@ int		fdf_atoi_hex(const char *str, int *len)
 			num = num * 16 + str[i] - 'A' + 10;
 		i++;
 	}
-	if (i >= 8)
+	if (i >= 9)
 		fdf_error();
 	*len = i + 1;
 	return (num);

@@ -19,14 +19,13 @@ void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff)
 	fdf->ang_z = 0;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
-	fdf->h_peek = 0;
+	fdf->h_peek = 1;
 	fdf->condition.help = 0;
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, WINSIZEX, WINSIZEY, "Title");
 	fdf->map_name = txt;
 	fdf->hght = count_enters(buff);
 	fdf->wdth = read_first_line(buff);
-	printf("%d  %d", fdf->hght, fdf->wdth);
 }
 
 
@@ -58,11 +57,11 @@ void validate(char *buff, t_fdf *fdf)
 		if (buff[i] == '\n')
 			fdf_error();
 		tmp = fdf_atoi(&buff[i], &len);
-		fdf->pnt[fdf->i]->x = (i % (fdf->wdth)) * fdf->k - fdf->dx;
-		fdf->pnt[fdf->i]->y = (i / (fdf->hght)) * fdf->k - fdf->dy;
+		fdf->pnt[fdf->i]->x = (fdf->i % (fdf->wdth)) * fdf->k - fdf->dx;
+		fdf->pnt[fdf->i]->y = (fdf->i / (fdf->wdth)) * fdf->k - fdf->dy;
 		fdf->pnt[fdf->i]->z = tmp * Z_KOEFF;
 		i += len;
-		fdf->pnt[fdf->i]->color = fdf_set_color(&(buff[i]), &len);
+		fdf->pnt[fdf->i]->color = fdf_set_color(&(buff[i]), &len, tmp);
 		i += len;
 		fdf->i += 1;
 		while (buff[i] == ' ')
@@ -75,7 +74,7 @@ void validate(char *buff, t_fdf *fdf)
 			{
 				i++;
 				if (fdf->i == fdf->wdth * fdf->hght
-				&& buff[i] == '\n' && buff[i + 1] == '\0')
+				&& buff[i] == '\0')
 					return ;
 				while (buff[i] == ' ')
 					i += 1;

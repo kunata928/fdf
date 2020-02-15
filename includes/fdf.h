@@ -1,9 +1,6 @@
 #ifndef FDF_H
 # define FDF_H
 
-#include <stdio.h>
-
-
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -13,7 +10,7 @@
 
 # define P_START			fdf.cur[start - 1]
 # define P_END				fdf.cur[end - 1]
-# define P_CURR				(fdf->pnt[i])
+# define P_CURR				(fdf->cur[i])
 
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
@@ -24,6 +21,12 @@
 # define TEXT_COL0			0x9D828F
 # define TEXT_COL1			0xAF6C93
 # define TEXT_COL2			0xD54E94
+# define R_1				0xD873A0
+# define R_2				0xA16785
+# define R_3				0xAD6A91
+# define R_4				0xDCAEB0
+# define DARK_R				0x6D3445
+
 
 # define WINSIZEX			1500
 # define WINSIZEY			1000
@@ -33,7 +36,7 @@
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
 # define Z_KOEFF			5
-# define DZ					1
+# define DZ					0.1
 
 # define KEYBOARD			1
 # define MOUSE				2
@@ -151,7 +154,7 @@ void		fdf_set_coefficient(t_fdf *fdf);
 
 int			fdf_color_peeks_deflt(int tmp);
 int			color_pnt_deflt(t_fdf fdf, int i, int i0, int i1);
-int			fdf_set_color(char *buff, int *len);
+int			fdf_set_color(char *buff, int *len, int z);
 
 int			fdf_color(t_fdf fdf, int start, int end);
 int			color_pnt(t_fdf fdf, int start, int end);

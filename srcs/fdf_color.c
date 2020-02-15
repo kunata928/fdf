@@ -32,15 +32,35 @@ int		fdf_color_peeks_deflt(int tmp)
 	return (ROSE);
 }
 
-int		fdf_set_color(char *buff, int *len)
+int		fdf_def_col(int z)
+{
+	if (z == 0)
+		return (ROSE);
+	if (z > 0 && z <= 3)
+		return (R_1);
+	if (z > 3 && z <= 6)
+		return (R_2);
+	if (z > 6 && z <= 10)
+		return (R_3);
+	if (z > 10 && z <= 20)
+		return (R_4);
+	if (z > 20)
+		return (WHITE);
+	return (DARK_R);
+}
+
+int		fdf_set_color(char *buff, int *len, int z)
 {
 	int i;
 
 	i = 0;
 	if (buff[i] && (buff[i] == ' ' || buff[i] == '\n'))
 	{
-		*len = 1;
-		return (DEF_COL);
+		if (buff[i] == ' ')
+			*len = 1;
+		else
+			*len = 0;
+		return (fdf_def_col(z));
 	}
 	if (buff[i] == ',')
 		return (fdf_atoi_hex(&(buff[i + 1]), len));
