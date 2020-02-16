@@ -40,10 +40,12 @@ int		fdf_def_col(int z)
 		return (R_1);
 	if (z > 3 && z <= 6)
 		return (R_2);
-	if (z > 6 && z <= 10)
+	if (z > 6 && z <= 8)
 		return (R_3);
-	if (z > 10 && z <= 20)
+	if (z > 8 && z <= 10)
 		return (R_4);
+	if (z > 10 && z <= 20)
+		return (R_5);
 	if (z > 20)
 		return (WHITE);
 	return (DARK_R);

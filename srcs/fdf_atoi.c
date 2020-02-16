@@ -77,7 +77,7 @@ int		fdf_atoi_hex(const char *str, int *len)
 	num = 0;
 	while (!str[i] || (str[i] >= '0' && str[i] <= '9') ||
 	(str[i] >= 'a' && str[i] <= 'f') ||
-	(str[i] >= 'A' && str[i] <= 'F') )
+	(str[i] >= 'A' && str[i] <= 'F'))
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			num = num * 16 + str[i] - '0';
@@ -88,7 +88,7 @@ int		fdf_atoi_hex(const char *str, int *len)
 		i++;
 	}
 	if (i >= 9)
-		fdf_error();
+		fdf_not_valid_col();
 	*len = i + 1;
 	return (num);
 }

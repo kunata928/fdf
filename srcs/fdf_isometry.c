@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_isometry.c                                         :+:      :+:    :+:   */
+/*   fdf_isometry.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,7 +47,7 @@ void		fdf_plot_front_view(t_fdf *fdf)
 	fdf->ang_z = 0;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
-	//fdf->scale = 1;
+	fdf->k = 1;
 	fdf_copy_in_cur(fdf);
 	fdf_eval_cur(fdf);
 	fdf_center(fdf);
@@ -56,19 +56,11 @@ void		fdf_plot_front_view(t_fdf *fdf)
 
 void		fdf_change_height(t_fdf *fdf, int key)
 {
-	int i;
-
-	i = 0;
 	if (key == KEY_NUM_7)
 		fdf->h_peek = fdf->h_peek - DZ;
 	else
 		fdf->h_peek = fdf->h_peek + DZ;
 	fdf_copy_in_cur(fdf);
-	while (i < fdf->wdth * fdf->hght)
-	{
-		(fdf->cur[i])->z = (int)((fdf->cur[i])->z * fdf->h_peek);
-		i++;
-	}
 	fdf_eval_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);

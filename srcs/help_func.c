@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_error.c                                        :+:      :+:    :+:   */
+/*   fdf_help_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelodi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,8 @@
 
 #include "../includes/fdf.h"
 
-void		fdf_error(void)
+void		skip_char(char *str, int *len, char ch)
 {
-	ft_putstr("error");
-	exit(1);
-}
-
-void		fdf_notvalid(void)
-{
-	ft_putstr("not valid file");
-	exit(1);
-}
-
-void		fdf_smthwrong(void)
-{
-	ft_putstr("smt went wrong");
-	exit(1);
-}
-
-void		fdf_not_valid_col(void)
-{
-	ft_putstr("not valid color, (Ex <0xAB271D or 0xfffff> followed after ',')");
-	exit(1);
+	while (*(str + *len) && (*(str + *len) == ch))
+		*len += 1;
 }

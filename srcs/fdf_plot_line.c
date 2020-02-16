@@ -28,7 +28,7 @@ void		init_curr(t_fdf fdf, int start, int end)
 	fdf.curr->y = P_START->y;
 	fdf.curr->dx = ft_diff_double(P_END->x, P_START->x);
 	fdf.curr->dy = ft_diff_double(P_END->y, P_START->y);
-	fdf.curr->color = P_START->color;//
+	fdf.curr->color = P_START->color;
 	fdf.curr->sx = 1;
 	fdf.curr->sy = 1;
 	if (P_START->x > P_END->x)
@@ -66,4 +66,3 @@ void		set_line(t_fdf fdf, int start, int end)
 		}
 	}
 }
-//color_pnt(fdf, start, end);

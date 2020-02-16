@@ -14,7 +14,7 @@ set(SOURCES srcs/main.c srcs/fdf_read.c srcs/fdf_error.c
 		srcs/fdf_keyboard.c srcs/fdf_rotate.c srcs/fdf_init.c
 		srcs/fdf_center.c srcs/fdf_color.c srcs/fdf_shift_zoom.c
 		srcs/fdf_color_gradient.c srcs/fdf_menu.c srcs/fdf_open_close.c
-		srcs/fdf_isometry.c)
+		srcs/fdf_isometry.c srcs/help_func.c)
 
 set(HEADERS includes/fdf.h includes/mlx.h)
 

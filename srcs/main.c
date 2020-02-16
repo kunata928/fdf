@@ -17,11 +17,10 @@ int main(int argc, char **argv)
 	int		fd;
 	t_fdf	*fdf;
 
-	//if (!(fdf_open(argc, argv, &fd)))
-	//	return (0);
-	fd = open("/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf", O_RDONLY);
+	if (!(fdf_open(argc,  argv, &fd)))
+		return (0);
 	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
-	if (!(fdf_read_file(fd, fdf, "/Users/pmelodi/Projects/fdf0/test_maps/elem.fdf")))//argv[1]
+	if (!(fdf_read_file(fd, fdf, argv[1])))
 		return (0);
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
@@ -30,10 +29,3 @@ int main(int argc, char **argv)
 	mlx_loop(fdf->mlx);
 	return (0);
 }
-//mlx_clear_window(fdf->mlx, fdf->win);
-//fdf->img_ptr = mlx_new_image(fdf->mlx, WINSIZEX, WINSIZEY);
-//fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
-//							   &fdf->s_line, &fdf->endian);
-//set_line(*fdf, 1, 2);
-//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img_ptr, 0, 0);
-//	mlx_destroy_image(fdf->mlx, fdf->img_ptr);

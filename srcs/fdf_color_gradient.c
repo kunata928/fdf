@@ -48,4 +48,3 @@ int			fdf_color(t_fdf fdf, int start, int end)
 			P_END->color & 0xFF, percentage);
 	return ((red << 16) | (green << 8) | blue);
 }
-

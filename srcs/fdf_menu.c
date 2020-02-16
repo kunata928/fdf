@@ -17,20 +17,20 @@ void		fdf_info_static0(t_fdf fdf)
 	char *txt;
 
 	mlx_string_put(fdf.mlx, fdf.win, 0, 0,
-				   TEXT_COL0, fdf.map_name);
+				TEXT_COL0, fdf.map_name);
 	mlx_string_put(fdf.mlx, fdf.win, 0, 18,
-				   TEXT_COL0, "Press <Esc> to exit");
+				TEXT_COL0, "Press <Esc> to exit");
 	mlx_string_put(fdf.mlx, fdf.win,
-				   WINSIZEX - 150, 5, TEXT_COL1, "Shift dx:");
+				WINSIZEX - 150, 5, TEXT_COL1, "Shift dx:");
 	txt = ft_itoa(-fdf.shift_x);
 	mlx_string_put(fdf.mlx, fdf.win,
-				   WINSIZEX - 57, 5, TEXT_COL2, txt);
+				WINSIZEX - 57, 5, TEXT_COL2, txt);
 	mlx_string_put(fdf.mlx, fdf.win,
-				   WINSIZEX - 150, 23, TEXT_COL1, "Shift dy:");
+				WINSIZEX - 150, 23, TEXT_COL1, "Shift dy:");
 	free(txt);
 	txt = ft_itoa(-fdf.shift_y);
 	mlx_string_put(fdf.mlx, fdf.win,
-				   WINSIZEX - 57, 23, TEXT_COL2, txt);
+				WINSIZEX - 57, 23, TEXT_COL2, txt);
 	free(txt);
 	fdf_info_static1(fdf);
 	fdf_info_help(fdf);

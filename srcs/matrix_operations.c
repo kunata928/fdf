@@ -52,6 +52,7 @@ void	fdf_eval_cur(t_fdf *fdf)
 	i = 0;
 	while (i < fdf->wdth * fdf->hght)
 	{
+		(fdf->cur[i])->z = (fdf->cur[i])->z * fdf->h_peek;
 		fdf_rotate_x(&(fdf->cur[i]->y), &(fdf->cur[i]->z), fdf->ang_x);
 		fdf_rotate_y(&(fdf->cur[i]->x), &(fdf->cur[i]->z), fdf->ang_y);
 		fdf_rotate_z(&(fdf->cur[i]->x), &(fdf->cur[i]->y), fdf->ang_z);

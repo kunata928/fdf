@@ -15,7 +15,7 @@
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
 # define WINE				0xAB271D
-# define ROSE				0xCC2950
+# define ROSE				0x6D3445
 # define STRONG_ROSE		0x9D788F
 # define DEF_COL			0xC488AC
 # define TEXT_COL0			0x9D828F
@@ -25,8 +25,8 @@
 # define R_2				0xA16785
 # define R_3				0xAD6A91
 # define R_4				0xDCAEB0
-# define DARK_R				0x6D3445
-
+# define R_5				0xC5D2BF
+# define DARK_R				0xCC2950
 
 # define WINSIZEX			1500
 # define WINSIZEY			1000
@@ -135,6 +135,7 @@ typedef struct	s_fdf
 
 	int		i;
 	int		h;
+	int		tmp;
 }				t_fdf;
 
 int			fdf_open(int argc, char **argv, int *fd);
@@ -159,9 +160,10 @@ int			fdf_set_color(char *buff, int *len, int z);
 int			fdf_color(t_fdf fdf, int start, int end);
 int			color_pnt(t_fdf fdf, int start, int end);
 
-void		fdf_error();
-void		fdf_smthwrong();
-void		fdf_notvalid();
+void		fdf_error(void);
+void		fdf_smthwrong(void);
+void		fdf_notvalid(void);
+void		fdf_not_valid_col(void);
 
 void		fdf_swap(double *a, double *b, double *d, double *e);
 void		fdf_br_init(t_fdf *fdf, int start, int end);
@@ -199,5 +201,7 @@ void		fdf_plot_isometry(t_fdf *fdf);
 void		fdf_plot_top_view(t_fdf *fdf);
 void		fdf_plot_front_view(t_fdf *fdf);
 void		fdf_change_height(t_fdf *fdf, int key);
+
+void		skip_char(char *str, int *len, char ch);
 
 # endif

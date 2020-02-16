@@ -31,7 +31,7 @@ FILES :=  main fdf_read fdf_error fdf_atoi fdf_plot \
         fdf_keyboard fdf_rotate fdf_init \
         fdf_center fdf_color fdf_shift_zoom \
         fdf_color_gradient fdf_menu fdf_open_close \
-        fdf_isometry \
+        fdf_isometry help_func\
 
 LIB :=		$(LIB_PATH)libft.a
 MLX :=		$(MLX_PATH)libmlx.a
