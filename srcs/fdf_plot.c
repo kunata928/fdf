@@ -24,6 +24,16 @@ void		fdf_copy_in_cur(t_fdf *fdf)
 	}
 }
 
+void		fdf_plot1pxl(t_fdf *fdf)
+{
+	fdf->cur[0]->x = fdf->kx - fdf->shift_x;
+	fdf->cur[0]->y = fdf->ky - fdf->shift_y;
+	if (fdf->cur[0]->x < WINSIZEX
+		&& fdf->cur[0]->y < WINSIZEY)
+	*(int*)(fdf->image + (int)(fdf->cur[0]->x) * 4 +
+			(int)(fdf->cur[0]->y) * fdf->s_line) = fdf->pnt[0]->color;
+}
+
 void		fdf_plot(t_fdf *fdf)
 {
 	int i;
@@ -33,6 +43,8 @@ void		fdf_plot(t_fdf *fdf)
 	fdf->image = mlx_get_data_addr(fdf->img_ptr, &fdf->bpp,
 			&fdf->s_line, &fdf->endian);
 	i = 0;
+	if ((fdf->hght - 1 == 0) && (fdf->wdth - 1 == 0))
+		fdf_plot1pxl(fdf);
 	while (i++ < fdf->hght * fdf->wdth - 1)
 	{
 		if (fdf->hght * fdf->wdth - i < fdf->wdth)

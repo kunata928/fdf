@@ -31,7 +31,7 @@
 # define WINSIZEX			1500
 # define WINSIZEY			1000
 # define H_Y				WINSIZEY - 225
-# define BUFF				1000000
+# define BUFF				7
 # define ANG_STEP			0.05
 # define SHIFT_STEP			5
 # define ZOOM_STEP			0.001
@@ -77,7 +77,6 @@ typedef struct	s_pnt
 	double	ang_y;
 	double	ang_z;
 	int		color;
-	double	h_peek;
 }				t_pnt;
 
 typedef struct	s_val
@@ -145,12 +144,11 @@ int			fdf_read_file(int fd, t_fdf *fdf, char *map_name);
 int			count_enters(char *buff);
 int			read_first_line(char *buff);
 void		fdf_count_numbers(char *str, int *len);
-int			norm_sign(char c);
 
 void		fdf_malloc_fdf(char *buff, t_fdf *fdf, char *map_name);
 void		validate(char *buff, t_fdf *fdf);
 void		fdf_init_subj(t_fdf *fdf, char *txt, char *buff);
-void		fdf_copy_in_cur(t_fdf *fdf);
+void		fdf_pnt_init(t_fdf *fdf, int *i, int *len, char *buff);
 void		fdf_set_coefficient(t_fdf *fdf);
 
 int			fdf_color_peeks_deflt(int tmp);
@@ -179,6 +177,8 @@ void		fdf_center(t_fdf *fdf);
 void		fdf_move_to_center(t_fdf *fdf);
 
 void		fdf_plot(t_fdf *fdf);
+void		fdf_plot1pxl(t_fdf *fdf);
+void		fdf_copy_in_cur(t_fdf *fdf);
 
 int			fdf_key_press(int keycode, t_fdf *fdf);
 int			fdf_check_key(int key);
@@ -203,5 +203,6 @@ void		fdf_plot_front_view(t_fdf *fdf);
 void		fdf_change_height(t_fdf *fdf, int key);
 
 void		skip_char(char *str, int *len, char ch);
+int			norm_sign(char c);
 
 # endif

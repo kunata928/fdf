@@ -12,14 +12,6 @@
 
 #include "../includes/fdf.h"
 
-int			norm_sign(char c)
-{
-	if (c && ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') ||
-	(c >= 'A' && c <= 'F')))
-		return (1);
-	else
-		return (0);
-}
 
 void		fdf_count_numbers(char *str, int *len)
 {
@@ -86,39 +78,38 @@ int			fdf_read_file(int fd, t_fdf *fdf, char *map_name)
 	int		longlen;
 	char	buff[BUFF + 1];
 	char	*longstr;
-	char	*buff1;
+	char	*tmp_buff;
 
 
 	len = read(fd, buff, BUFF);
 	if (!len)
 		fdf_error();
-	if ((longstr = (char *)malloc((len + 1) * sizeof(char))) == NULL)
+
+	if ((longstr = (char *)malloc((1) * sizeof(char))) == NULL)
 		fdf_error();
-	longlen = len;
+	//*tmp_buff = '\0';
+	longlen = 0;
 	while (len != 0)
 	{
-		len = read(fd, buff, BUFF);
-		if (len < 0)
+//		if (len < 0)
+//			fdf_error();
+		if ((tmp_buff = (char *)malloc((longlen + len + 1) * sizeof(char))) == NULL)
 			fdf_error();
-		if (len)
-		{
-			if ((buff1 = (char *)malloc((longlen + len + 1) * sizeof(char))) == NULL)
-				fdf_error();
-			ft_memcpy(buff1, longstr, longlen);
-			ft_memcpy(&(buff1[longlen]), buff, len);
-			longlen += len;
-			free(longstr);
-			longstr = buff1;
-		}
+		ft_memcpy(tmp_buff, longstr, longlen);
+		ft_memcpy(&(tmp_buff[longlen]), buff, len);
+		longlen += len;
+		free(longstr);
+		longstr = tmp_buff;
+		len = read(fd, buff, BUFF);
 	}
-	if (buff[len - 1] != '\n')
+	if (longstr[longlen - 1] != '\n')
 	{
-		buff[len] = '\n';
-		buff[len + 1] = '\0';
+		longstr[longlen] = '\n';
+		longstr[longlen + 1] = '\0';
 	}
 	else
-		buff[len] = '\0';
-	fdf_malloc_fdf(buff, fdf, map_name);
+		longstr[longlen] = '\0';
+	fdf_malloc_fdf(longstr, fdf, map_name);
 	return (1);
 }
 
