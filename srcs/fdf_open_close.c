@@ -19,7 +19,7 @@ int		fdf_open(int argc, char **argv, int *fd)
 		ft_putendl("Usage: ./fdf source_file.fdf");
 		return (0);
 	}
-	if ((*fd = open(argv[1], O_RDONLY)) == -1)
+	if (((*fd = open(argv[1], O_RDONLY)) == -1) || (read(*fd, NULL, 0) < 0))
 	{
 		ft_putendl("error");
 		return (0);
