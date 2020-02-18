@@ -47,9 +47,9 @@ void		fdf_shift(int key, t_fdf *fdf)
 		fdf_add_shift(fdf, 1, dx, dy);
 	if (key == KEY_NUM_DOWN || key == KEY_NUM_UP)
 		fdf_add_shift(fdf, 0, dx, dy);
-	fdf_plot(fdf);
 	fdf->kx += dx;
 	fdf->ky += dy;
 	fdf->shift_x -= dx;
 	fdf->shift_y -= dy;
+	fdf_plot(fdf);
 }

@@ -22,37 +22,53 @@ double		ft_diff_double(double x0, double x1)
 	return (d);
 }
 
-void		init_curr(t_fdf fdf, int start, int end)
+void		init_curr(t_fdf fdf, int s, int e)
 {
-	fdf.curr->x = P_START->x;
-	fdf.curr->y = P_START->y;
-	fdf.curr->dx = ft_diff_double(P_END->x, P_START->x);
-	fdf.curr->dy = ft_diff_double(P_END->y, P_START->y);
-	fdf.curr->color = P_START->color;
+	fdf.curr->x = fdf.cur[s - 1]->x;
+	fdf.curr->y = fdf.cur[s - 1]->y;
+	fdf.curr->dx = ft_diff_double(fdf.cur[e - 1]->x, fdf.cur[s - 1]->x);
+	fdf.curr->dy = ft_diff_double(fdf.cur[e - 1]->y, fdf.cur[s - 1]->y);
+	fdf.curr->color = fdf.cur[s - 1]->color;
 	fdf.curr->sx = 1;
 	fdf.curr->sy = 1;
-	if (P_START->x > P_END->x)
+	if (fdf.cur[s - 1]->x > fdf.cur[e - 1]->x)
 		fdf.curr->sx = -1;
-	if (P_START->y > P_END->y)
+	if (fdf.cur[s - 1]->y > fdf.cur[e - 1]->y)
 		fdf.curr->sy = -1;
 	return ;
 }
 
-void		set_line(t_fdf fdf, int start, int end)
+int			check_window(double x0, double y0)
+{
+	if (x0 < 0 || y0 < 0 || x0 >= WINSIZEX || y0 >= WINSIZEY)
+		return (1);
+	return (0);
+}
+
+void		change_points(t_fdf fdf, int *s, int *e)
+{
+	int start;
+
+	start = *s;
+	if (check_window(fdf.cur[start - 1]->x, fdf.cur[start - 1]->y))
+		swap(s, e);
+}
+
+void		set_line(t_fdf fdf, int s, int e)
 {
 	double err;
 	double e2;
 
-	init_curr(fdf, start, end);
+	init_curr(fdf, s, e);
 	err = -(fdf.curr->dy) / 2;
 	if (fdf.curr->dx > fdf.curr->dy)
 		err = fdf.curr->dx / 2;
-	while (fdf.curr->x != P_END->x || fdf.curr->y != P_END->y)
+	while (fdf.curr->x != fdf.cur[e - 1]->x || fdf.curr->y != fdf.cur[e - 1]->y)
 	{
 		if (fdf.curr->x >= 0 && fdf.curr->x < WINSIZEX
 		&& fdf.curr->y >= 0 && fdf.curr->y < WINSIZEY)
 			*(int*)(fdf.image + (int)fdf.curr->x * 4 +
-					(int)fdf.curr->y * fdf.s_line) = fdf_color(fdf, start, end);
+					(int)fdf.curr->y * fdf.s_line) = fdf_color(fdf, s, e);
 		e2 = err;
 		if (e2 > -(fdf.curr->dx))
 		{

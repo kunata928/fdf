@@ -36,12 +36,28 @@ void		fdf_turn_in_help(t_fdf *fdf)
 	fdf_plot(fdf);
 }
 
+void		close_all(t_fdf *fdf)
+{
+	int i;
+
+	i = 0;
+	while (fdf->pnt[fdf->i])
+		ft_memdel((void **)&(fdf->pnt[(fdf->i)++]));
+	fdf->i = 0;
+	while (fdf->cur[fdf->i])
+		ft_memdel((void **)&(fdf->cur[(fdf->i)++]));
+	ft_memdel((void **)&fdf->pnt);
+	ft_memdel((void **)&fdf->cur);
+	ft_memdel((void **)&fdf);
+	exit(0);
+}
+
 int			fdf_key_press(int keycode, t_fdf *fdf)
 {
 	if (fdf_check_key(keycode))
 	{
 		if (keycode == KEY_ESC)
-			exit(0);
+			close_all(fdf);
 		if (keycode == KEY_NUM_4 || keycode == KEY_NUM_6 || keycode == KEY_NUM_2
 		|| keycode == KEY_NUM_8 || keycode == KEY_NUM_1 || keycode == KEY_NUM_3)
 			fdf_rotate(keycode, fdf);

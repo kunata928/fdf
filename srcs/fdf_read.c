@@ -12,8 +12,7 @@
 
 #include "../includes/fdf.h"
 
-
-void		fdf_count_numbers(char *str, int *len)
+void		fdf_count_numbers(char *str, int *len, t_fdf *fdf)
 {
 	skip_char(str, len, ' ');
 	if (*(str + *len) == '-' || *(str + *len) == '+')
@@ -31,14 +30,14 @@ void		fdf_count_numbers(char *str, int *len)
 				*len += 1;
 		}
 		else
-			fdf_not_valid_col();
+			fdf_not_valid_col(fdf);
 	}
 	if (*(str + *len) != ' ' && *(str + *len) != '\n')
-		fdf_notvalid();
+		fdf_notvalid(fdf);
 	skip_char(str, len, ' ');
 }
 
-int			read_first_line(char *buff)
+int			read_first_line(char *buff, t_fdf *fdf)
 {
 	int i;
 	int c;
@@ -49,105 +48,59 @@ int			read_first_line(char *buff)
 	while (buff[i] != '\n')
 	{
 		len = 0;
-		fdf_count_numbers(&buff[i], &len);
+		fdf_count_numbers(&buff[i], &len, fdf);
 		i += len;
 		c++;
 	}
 	return (c);
 }
 
-int			count_enters(char *buff)
+int			count_enters(char *buff, t_fdf *fdf)
 {
 	int i;
 	int cnt;
+	int flag;
 
 	i = 0;
 	cnt = 0;
+	flag = 0;
 	while (buff[i])
 	{
+		if (cnt == 0 && (buff[i] >= '0' && buff[i] <= '9'))
+			flag = 1;
 		if (buff[i] == '\n')
 			cnt++;
 		i++;
 	}
+	if (!flag)
+		fdf_notvalid(fdf);
 	return (cnt);
 }
 
 int			fdf_read_file(int fd, t_fdf *fdf, char *map_name)
 {
-	int		len;
-	int		longlen;
+	int		llen;
 	char	buff[BUFF + 1];
-	char	*longstr;
 	char	*tmp_buff;
 
-
-	len = read(fd, buff, BUFF);
-	if (!len)
+	fdf->len = read(fd, buff, BUFF);
+	if (!(fdf->len))
 		fdf_error();
-
-	if ((longstr = (char *)malloc((1) * sizeof(char))) == NULL)
-		fdf_error();
-	//*tmp_buff = '\0';
-	longlen = 0;
-	while (len != 0)
+	if ((fdf->lstr = (char *)ft_memalloc((1) * sizeof(char))) == NULL)
+		fdf_smthwrong(1, fdf);
+	llen = 0;
+	while (fdf->len != 0)
 	{
-//		if (len < 0)
-//			fdf_error();
-		if ((tmp_buff = (char *)malloc((longlen + len + 1) * sizeof(char))) == NULL)
-			fdf_error();
-		ft_memcpy(tmp_buff, longstr, longlen);
-		ft_memcpy(&(tmp_buff[longlen]), buff, len);
-		longlen += len;
-		free(longstr);
-		longstr = tmp_buff;
-		len = read(fd, buff, BUFF);
+		if ((tmp_buff = (char *)ft_memalloc(llen + fdf->len + 1)) == NULL)
+			fdf_smthwrong(2, fdf);
+		ft_memcpy(tmp_buff, fdf->lstr, llen);
+		ft_memcpy(&(tmp_buff[llen]), buff, fdf->len);
+		llen += fdf->len;
+		free(fdf->lstr);
+		fdf->lstr = tmp_buff;
+		fdf->len = read(fd, buff, BUFF);
 	}
-	if (longstr[longlen - 1] != '\n')
-	{
-		longstr[longlen] = '\n';
-		longstr[longlen + 1] = '\0';
-	}
-	else
-		longstr[longlen] = '\0';
-	fdf_malloc_fdf(longstr, fdf, map_name);
+	close(fd);
+	fdf_malloc_fdf(fdf->lstr, fdf, map_name, llen);
 	return (1);
 }
-
-//int		len;
-//	int		longlen;
-//	char	buff[BUFF + 1];
-//	char	*longstr;
-//	char	*buff1;
-//
-//
-//	len = read(fd, buff, BUFF);
-//	if (!len)
-//		fdf_error();
-//	if ((longstr = (char *)malloc((len + 1) * sizeof(char))) == NULL)
-//		fdf_error();
-//	longlen = len;
-//	while (len != 0)
-//	{
-//		len = read(fd, buff, BUFF);
-//		if (len < 0)
-//			fdf_error();
-//		if (len)
-//		{
-//			if ((buff1 = (char *)malloc((longlen + len + 1) * sizeof(char))) == NULL)
-//				fdf_error();
-//			ft_memcpy(buff1, longstr, longlen);
-//			ft_memcpy(&(buff1[longlen]), buff, len);
-//			longlen += len;
-//			free(longstr);
-//			longstr = buff1;
-//		}
-//	}
-//	if (buff[len - 1] != '\n')
-//	{
-//		buff[len] = '\n';
-//		buff[len + 1] = '\0';
-//	}
-//	else
-//		buff[len] = '\0';
-//	fdf_malloc_fdf(buff, fdf, map_name);
-//	return (1);

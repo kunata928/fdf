@@ -23,11 +23,11 @@ void		fdf_move_to_center(t_fdf *fdf)
 		(fdf->cur[i])->y = (int)((fdf->cur[i])->y + fdf->shift_y);
 		i++;
 	}
-	fdf_plot(fdf);
 	fdf->kx = fdf->kx + fdf->shift_x;
 	fdf->ky = fdf->ky + fdf->shift_y;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
+	fdf_plot(fdf);
 	return ;
 }
 

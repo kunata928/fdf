@@ -12,14 +12,14 @@
 
 #include "../includes/fdf.h"
 
-int		color_pnt(t_fdf fdf, int start, int end)
+int		color_pnt(t_fdf fdf, int s, int e)
 {
-	if (fdf.curr->color == P_END->color)
+	if (fdf.curr->color == fdf.cur[e - 1]->color)
 		return (fdf.curr->color);
-	if (fdf.curr->x == P_START->x && fdf.curr->y == P_START->y)
-		return (P_START->color);
-	if (fdf.curr->x == P_END->x && fdf.curr->y == P_END->y)
-		return (P_END->color);
+	if (fdf.curr->x == fdf.cur[s - 1]->x && fdf.curr->y == fdf.cur[s - 1]->y)
+		return (fdf.cur[s - 1]->color);
+	if (fdf.curr->x == fdf.cur[e - 1]->x && fdf.curr->y == fdf.cur[e - 1]->y)
+		return (fdf.cur[e - 1]->color);
 	return (DEF_COL);
 }
 
@@ -51,7 +51,7 @@ int		fdf_def_col(int z)
 	return (DARK_R);
 }
 
-int		fdf_set_color(char *buff, int *len, int z)
+int		fdf_set_color(char *buff, int *len, int z, t_fdf *fdf)
 {
 	int i;
 
@@ -65,7 +65,7 @@ int		fdf_set_color(char *buff, int *len, int z)
 		return (fdf_def_col(z));
 	}
 	if (buff[i] == ',')
-		return (fdf_atoi_hex(&(buff[i + 1]), len));
+		return (fdf_atoi_hex(&(buff[i + 1]), len, fdf));
 	fdf_error();
 	return (0);
 }

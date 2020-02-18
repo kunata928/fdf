@@ -66,7 +66,7 @@ int		fdf_atoi(const char *str, int *len)
 	return (int)(res * sign);
 }
 
-int		fdf_atoi_hex(const char *str, int *len)
+int		fdf_atoi_hex(const char *str, int *len, t_fdf *fdf)
 {
 	int i;
 	int num;
@@ -88,7 +88,7 @@ int		fdf_atoi_hex(const char *str, int *len)
 		i++;
 	}
 	if (i >= 9)
-		fdf_not_valid_col();
+		fdf_not_valid_col(fdf);
 	*len = i + 1;
 	return (num);
 }

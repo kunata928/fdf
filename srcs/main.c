@@ -12,19 +12,21 @@
 
 #include "../includes/fdf.h"
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int		fd;
 	t_fdf	*fdf;
 
-	if (!(fdf_open(argc,  argv, &fd)))
+	if (!(fdf_open(argc, argv, &fd)))
 		return (0);
-	fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf));
+	if ((fdf = (t_fdf *)ft_memalloc(sizeof(t_fdf))) == NULL)
+		fdf_error();
 	if (!(fdf_read_file(fd, fdf, argv[1])))
 		return (0);
 	fdf_copy_in_cur(fdf);
 	fdf_center(fdf);
 	fdf_plot(fdf);
+	mlx_hook(fdf->win, 17, 0, fdf_close, 0);
 	mlx_hook(fdf->win, 2, 0, fdf_key_press, fdf);
 	mlx_loop(fdf->mlx);
 	return (0);
