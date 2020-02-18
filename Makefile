@@ -12,6 +12,10 @@
 
 NAME = fdf
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
 SRC_PATH :=		srcs/
 INC_PATH :=		includes/
 LIB_PATH :=		libft/
@@ -44,22 +48,32 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ_PATH) $(OBJS) $(MLX)
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(LFLAGS) $(OBJS) -o $(NAME) $(MLX) $(MLXFLAGS)
+	@echo "\n$(GREEN)Fdf created$(RESET)"
 
 $(LIB):
 	@ $(MAKE) -C $(dir $@) $(notdir $@)
 
 $(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)$(SRC_PATH)
+	@ mkdir -p $(OBJ_PATH)$(SRC_PATH)
 $(OBJ_PATH)%.o: %.c $(HDRS)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@echo -n '.'
 
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIB_PATH)
+	@ rm -f $(OBJS)
+	@ make clean -C $(LIB_PATH)
+	@echo "$(RED)Objs deleted$(RESET)"
 
-fclean:
-	rm -f $(NAME)
-	rm -rf $(OBJ_PATH)
-	make fclean -C $(LIB_PATH)
+fclean: clean
+	@ rm -f $(NAME)
+	@ rm -rf $(OBJ_PATH)
+	@ make fclean -C $(LIB_PATH)
+	@echo "$(RED)Fdf deleted$(RESET)"
 
 re: fclean all
+
+norm:
+	@norminette srcs/
+	@norminette includes/fdf.h
+	@norminette libft/srcs/
+	@norminette libft/includes/

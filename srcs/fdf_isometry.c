@@ -14,9 +14,9 @@
 
 void		fdf_plot_isometry(t_fdf *fdf)
 {
-	fdf->ang_x = 0.785398;
+	fdf->ang_x = -0.785398;
 	fdf->ang_y = 0.610865;
-	fdf->ang_z = 0.523599;
+	fdf->ang_z = -0.523599;
 	fdf->shift_x = 0;
 	fdf->shift_y = 0;
 	fdf->k = 1.2;

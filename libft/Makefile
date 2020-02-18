@@ -12,6 +12,10 @@
 
 NAME = libft.a
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
 OBJ_PATH :=	.obj/
 SRC_PATH :=	srcs/
 INC_PATH :=	includes/
@@ -58,14 +62,14 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
-	@echo $(NAME): $(OBJ_PATH) was created
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HDRS)
 	@$(CC) $(CFLAGS) -c $(IFLAGS) $< -o $@
+	@echo -n '.'
 
 clean:
 	@rm -rf $(OBJS)
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
 
 fclean: clean
 	@rm -rf libft.a
